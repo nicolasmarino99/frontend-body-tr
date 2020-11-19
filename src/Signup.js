@@ -18,8 +18,40 @@ const Signup = props => {
     
       const handleSubmit = event => {
           event.preventDefault()
-      };
-  
+          const {username, email, password, password_confirmation} = credentials
+          let user = {
+            username: username,
+            email: email,
+            password: password,
+            password_confirmation: password_confirmation
+          }
+          sendPostRequest(user)
+        };
+        const sendPostRequest = async () => {
+            try {
+                const response = await axios.post('http://localhost:3001/api/v1/users',
+                {user}, 
+                {withCredentials: true});
+                if (response.data.status === 'created') {
+                  props.handleLogin(response.data)
+                  redirect()
+                } else {
+                  setCredentials({errors: response.data.errors})
+                }
+            } catch (err) {
+                // Handle Error Here
+                console.error(err);
+          }        
+          const redirect = () => {
+            props.history.push('/')
+          }
+          handleErrors = () => (
+            <div>
+              <ul>
+                {credentials.errors.map(error => <li key={error}>{error}</li>)}
+              </ul>
+            </div>
+          )
   return ( 
       
     <div>
