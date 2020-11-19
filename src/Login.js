@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 const Login = props => {
   const [credentials, setCredentials] = useState({ 
     username: '',
@@ -14,11 +14,43 @@ const Login = props => {
     const {name, value} = event.target
     setCredentials({[name]: value})
   };
-  
+
     const handleSubmit = event => {
         event.preventDefault()
+        const {username, email, password} = credentials
+        let user = {
+          username: username,
+          email: email,
+          password: password
+        }
+        sendPostRequest(user)
     };
 
+    const sendPostRequest = async () => {
+      try {
+          const response = await axios.post('http://localhost:3001/api/v1/login',
+          {user}, 
+          {withCredentials: true});
+          if (response.data.logged_in) {
+            props.handleLogin(response.data)
+            redirect()
+          } else {
+            setCredentials({errors: response.data.errors})
+          }
+      } catch (err) {
+          // Handle Error Here
+          console.error(err);
+    }
+      const redirect = () => {
+        props.history.push('/')
+      }
+      handleErrors = () => (
+          <div>
+            <ul>
+              {credentials.errors.map(error => <li key={error}>{error}</li>)}
+            </ul>
+          </div>
+        )
 return ( 
     
       <div>
