@@ -3,9 +3,9 @@ import {Link} from 'react-router-dom'
 const Home = () => {
   return (
     <div>
-      <Link to='/login'>Log In</Link>
+      <Link to='api/v1/login'>Log In</Link>
       <br></br>
-      <Link to='/signup'>Sign Up</Link>
+      <Link to='api/v1/signup'>Sign Up</Link>
     </div>
   );
 };
