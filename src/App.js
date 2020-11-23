@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios'
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
+import Login from './Login';
+import Signup from './Signup';
+import Home from './Home';
 
 const App = props => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [user, setUser] = useState({})
- 
-  const handleLogin = data => {
+
+  const handleLogin = data => { 
     setIsLoggedIn(true)
     setUser(data.user)
   }
@@ -15,15 +18,17 @@ const App = props => {
     setIsLoggedIn(false)
     setUser({})
   }
-  useEffect(() => (
+  useEffect(() => {
     sendGetRequest()
-  ), [0])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   const sendGetRequest = async () => {
     try {
         const response = await axios.get('http://localhost:3001/api/v1/logged_in', 
         {withCredentials: true});
         if (response.data.logged_in) {
           handleLogin(response)
+          console.log(response)   
         } else {
           handleLogout()
         }
@@ -37,9 +42,15 @@ const App = props => {
     <div>
         <BrowserRouter>
         <Switch>
-          <Route exact path='/' component={}/>
-          <Route exact path='api/v1/login' component={}/>
-          <Route exact path='api/v1/signup' component={}/>
+          <Route path="/" exact >
+            <Home user={user} isLoggedIn={isLoggedIn}/>
+          </Route>
+          <Route path="/signup" exact >
+            <Signup handleLogin={handleLogin}/>
+          </Route>
+          <Route path="/login" exact >
+            <Login handleLogin={handleLogin}/>
+          </Route>
         </Switch>
       </BrowserRouter>
     </div>

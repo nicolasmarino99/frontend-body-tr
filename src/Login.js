@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios'
-import {Link, Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 const Login = props => {
   const [credentials, setCredentials] = useState({ 
     username: '',
@@ -25,8 +25,11 @@ const Login = props => {
         }
         sendPostRequest(user)
     };
+    const redirect = () => {
+      props.history.push('/')
+    }
 
-    const sendPostRequest = async () => {
+    const sendPostRequest = async (user) => {
       try {
           const response = await axios.post('http://localhost:3001/api/v1/login',
           {user}, 
@@ -40,19 +43,17 @@ const Login = props => {
       } catch (err) {
           // Handle Error Here
           console.error(err);
-    }
-      const redirect = () => {
-        props.history.push('/')
       }
-      handleErrors = () => (
+    }
+      
+      const handleErrors = () => (
           <div>
             <ul>
               {credentials.errors.map(error => <li key={error}>{error}</li>)}
             </ul>
           </div>
         )
-return ( 
-    
+    return ( 
       <div>
         <h1>Log In</h1>        
           <form onSubmit={handleSubmit}>
@@ -86,7 +87,6 @@ return (
           
          </form>
       </div>
-    );
-  }
-}
+  );
+};
 export default Login;

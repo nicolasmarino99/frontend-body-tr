@@ -1,11 +1,23 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
-const Home = () => {
+const Home = ({user, isLoggedIn}) => {
+  console.log(user, isLoggedIn)
+
   return (
+     
     <div>
-      <Link to='api/v1/login'>Log In</Link>
-      <br></br>
-      <Link to='api/v1/signup'>Sign Up</Link>
+      {isLoggedIn ? 
+      <div>
+        <Link to='/logout'>Logout</Link>
+      </div>
+      : 
+      <div>
+       <Link to='/login'>Log In</Link>
+       <br></br>
+       <Link to='/signup'>Sign Up</Link>
+      </div>}
+
+      
     </div>
   );
 };

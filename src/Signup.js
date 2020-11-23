@@ -1,33 +1,41 @@
 import React, { useState } from 'react';
 import axios from 'axios'
+import { useHistory } from 'react-router';
 
 const Signup = props => {
     const [credentials, setCredentials] = useState({ 
-        username: '',
+        name: '',
         email: '',
         password: '',
         password_confirmation: '',
+        weight: '', 
+        height: '',
         errors: ''
      }) 
-     const {username, email, password, password_confirmation} = credentials
+     const {name, email, password, password_confirmation, weight, height} = credentials
   
      const handleChange = event => {
       const {name, value} = event.target
-      setCredentials({[name]: value})
+      setCredentials({...credentials, [name]: value})
+     
     };
+    let history = useHistory();
     
       const handleSubmit = event => {
           event.preventDefault()
-          const {username, email, password, password_confirmation} = credentials
+          const {name, email, password, password_confirmation, weight, height} = credentials
           let user = {
-            username: username,
+            name: name,
             email: email,
             password: password,
-            password_confirmation: password_confirmation
+            password_confirmation: password_confirmation,
+            weight: weight,
+            height: height,
           }
+          console.log(credentials)
           sendPostRequest(user)
         };
-        const sendPostRequest = async () => {
+        const sendPostRequest = async (user) => {
             try {
                 const response = await axios.post('http://localhost:3001/api/v1/users',
                 {user}, 
@@ -41,11 +49,14 @@ const Signup = props => {
             } catch (err) {
                 // Handle Error Here
                 console.error(err);
+            }
           }        
           const redirect = () => {
-            props.history.push('/')
+            
+            history.push('/')
           }
-          handleErrors = () => (
+
+         const handleErrors = () => (
             <div>
               <ul>
                 {credentials.errors.map(error => <li key={error}>{error}</li>)}
@@ -55,13 +66,14 @@ const Signup = props => {
   return ( 
       
     <div>
+      
     <h1>Sign Up</h1>        
-<form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <input
-        placeholder="username"
+        placeholder="name"
         type="text"
-        name="username"
-        value={username}
+        name="name"
+        value={name}
         onChange={handleChange}
       />
       <input
@@ -85,14 +97,29 @@ const Signup = props => {
         value={password_confirmation}
         onChange={handleChange}
       />
+      <input
+        placeholder="weight"
+        type="number"
+        name="weight"
+        value={weight}
+        onChange={handleChange}
+      />
+      <input
+        placeholder="height"  
+        type="number"
+        name="height"
+        value={height}
+        onChange={handleChange}
+      />
     
       <button placeholder="submit" type="submit">
         Sign Up
       </button>
   
     </form>
+    <handleErrors />
   </div>
       );
-    }
-  }
+    
+  };
   export default Signup;
