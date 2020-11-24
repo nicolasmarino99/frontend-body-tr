@@ -42,16 +42,16 @@ const Signup = props => {
                 {withCredentials: true});
                 if (response.data.status === 'created') {
                   props.handleLogin(response.data)
-                  redirect()
+                  handleClick()
                 } else {
-                  setCredentials({errors: response.data.errors})
+                  setCredentials({...credentials, errors: response.data.errors})
                 }
             } catch (err) {
                 // Handle Error Here
                 console.error(err);
             }
           }        
-          const redirect = () => {
+          const handleClick = () => {
             
             history.push('/')
           }
@@ -112,12 +112,12 @@ const Signup = props => {
         onChange={handleChange}
       />
     
-      <button placeholder="submit" type="submit">
+      <button placeholder="submit" type="submit" >
         Sign Up
       </button>
   
     </form>
-    <handleErrors />
+    
   </div>
       );
     
