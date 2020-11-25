@@ -35,6 +35,8 @@ const Signup = props => {
           }
           console.log(credentials)
           sendPostRequest(user)
+          
+    history.push('/')
         };
         const sendPostRequest = async (user) => {
             try {
