@@ -4,6 +4,7 @@ import axios from 'axios'
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import Login from './Login';
 import Signup from './Signup';
+import Logout from './Logout';
 import Home from './Home';
 
 const App = props => {
@@ -12,7 +13,8 @@ const App = props => {
 
   const handleLogin = data => { 
     setIsLoggedIn(true)
-    setUser(data.user)
+    setUser(data.data.user)
+    console.log(data.user)
   }
   const handleLogout = () => {
     setIsLoggedIn(false)
@@ -28,7 +30,8 @@ const App = props => {
         {withCredentials: true});
         if (response.data.logged_in) {
           handleLogin(response)
-          console.log(response)   
+          
+          
         } else {
           handleLogout()
         }
@@ -37,19 +40,23 @@ const App = props => {
         console.error(err);
     }
 };
-  
+  console.log(user)
   return (
     <div>
         <BrowserRouter>
         <Switch>
           <Route path="/" exact >
-            <Home user={user} isLoggedIn={isLoggedIn}/>
+            <Home user={user} isLoggedIn={isLoggedIn} handleLogout={handleLogout}/>
           </Route>
           <Route path="/signup" exact >
             <Signup handleLogin={handleLogin}/>
           </Route>
           <Route path="/login" exact >
             <Login handleLogin={handleLogin}/>
+          </Route>
+    
+          <Route path="/logout" exact >
+              <Logout handleLogout={handleLogout}/>
           </Route>
         </Switch>
       </BrowserRouter>

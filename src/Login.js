@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios'
 import {Link, useHistory} from 'react-router-dom'
+
 const Login = props => {
   const [credentials, setCredentials] = useState({ 
     username: '',
@@ -12,6 +13,7 @@ const Login = props => {
 
    const handleChange = event => {
     const {name, value} = event.target
+
     setCredentials({...credentials, [name]: value})
   };
 
@@ -23,6 +25,7 @@ const Login = props => {
           email: email,
           password: password
         }
+        console.log(user)
         sendPostRequest(user)
     };
     let history = useHistory()
@@ -37,6 +40,8 @@ const Login = props => {
           {withCredentials: true});
           if (response.data.logged_in) {
             props.handleLogin(response.data)
+            console.log(response)
+            redirect()
           } else {
             setCredentials({errors: response.data.errors})
           }
@@ -78,7 +83,7 @@ const Login = props => {
             value={password}
             onChange={handleChange}
           />         
-        <button placeholder="submit" type="submit" onClick={redirect}>
+        <button placeholder="submit" type="submit">
             Log In
           </button>          
           <div>
