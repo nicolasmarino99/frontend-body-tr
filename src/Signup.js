@@ -3,7 +3,6 @@ import axios from 'axios'
 import { useHistory } from 'react-router';
 
 const Signup = props => {
-    const [onOff, setOnOff] = useState(false)
     const [credentials, setCredentials] = useState({ 
         name: '',
         email: '',
@@ -36,7 +35,7 @@ const Signup = props => {
           console.log(credentials)
           sendPostRequest(user)
           
-    history.push('/')
+           history.push('/')
         };
         const sendPostRequest = async (user) => {
             try {
@@ -45,8 +44,7 @@ const Signup = props => {
                 {withCredentials: true});
                 if (response.data.status === 'created') {
                   props.handleLogin(response.data)
-                  redirect()
-                  setOnOff(true)
+                  
                   
                 } else {
                   setCredentials({...credentials, errors: response.data.errors})
@@ -56,10 +54,7 @@ const Signup = props => {
                 console.error(err);
             }
           }        
-          const redirect = () => {
-            
-            history.push('/')
-          }
+         
 
          const handleErrors = () => (
             <div>
@@ -117,7 +112,7 @@ const Signup = props => {
         onChange={handleChange}
       />
     
-      <button disabled={onOff} placeholder="submit" type="submit">
+      <button placeholder="submit" type="submit">
         Sign Up
       </button>
     </form>

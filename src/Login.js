@@ -4,34 +4,31 @@ import {Link, useHistory} from 'react-router-dom'
 
 const Login = props => {
   const [credentials, setCredentials] = useState({ 
-    username: '',
-    email: '',
+    name: '',
     password: '',
     errors: ''
    }) 
-   const {username, email, password} = credentials
+   const {name, password} = credentials
 
    const handleChange = event => {
     const {name, value} = event.target
 
     setCredentials({...credentials, [name]: value})
   };
-
+  let history = useHistory()
     const handleSubmit = event => {
         event.preventDefault()
-        const {username, email, password} = credentials
+        const {name, password} = credentials
         let user = {
-          username: username,
-          email: email,
+          name: name,
           password: password
         }
         console.log(user)
         sendPostRequest(user)
+        history.push('/')
     };
-    let history = useHistory()
-    const redirect = () => {
-      history.push('/')
-    }
+    
+    
 
     const sendPostRequest = async (user) => {
       try {
@@ -41,9 +38,8 @@ const Login = props => {
           if (response.data.logged_in) {
             props.handleLogin(response.data)
             console.log(response)
-            redirect()
           } else {
-            setCredentials({errors: response.data.errors})
+            setCredentials({...credentials ,errors: response.data.errors})
           }
       } catch (err) {
           // Handle Error Here
@@ -63,19 +59,12 @@ const Login = props => {
         <h1>Log In</h1>        
           <form onSubmit={handleSubmit}>
             <input
-              placeholder="username"
+              placeholder="name"
               type="text"
-              name="username"
-              value={username}
+              name="name"
+              value={name}
               onChange={handleChange}
             />
-          <input
-            placeholder="email"
-            type="text"
-            name="email"
-            value={email}
-            onChange={handleChange}
-          />
           <input
             placeholder="password"
             type="password"
