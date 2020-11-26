@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios'
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
-import Login from './Login';
-import Signup from './Signup';
-import Logout from './Logout';
-import Home from './Home';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import Logout from './components/Logout';
+import Home from './components/Home';
 
 const App = props => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)

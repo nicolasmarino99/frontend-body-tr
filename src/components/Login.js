@@ -38,6 +38,7 @@ const Login = props => {
           if (response.data.logged_in) {
             props.handleLogin(response.data)
             console.log(response)
+            
           } else {
             setCredentials({...credentials ,errors: response.data.errors})
           }
