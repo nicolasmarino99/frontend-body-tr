@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom'
 import Dashboard from './Dashboard';
 import HomeSign from './HomeSign';
+import './Home.scss';
 const Home = ({user, isLoggedIn}) => (
      
     <div className="Home">

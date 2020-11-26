@@ -1,12 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
 
-const HomeSign = ({user}) => {
+const HomeSign = () => {
     return (
-        <div>
-            <Link to='/logout'>Logout</Link>
-             <h1>Hello {user.name}</h1>
-
+        <div className="HomeSign">
+            
+            <Link to='/login'>Log In</Link>
+            <Link to='/signup'>Sign Up</Link>
              
       </div>
     );
