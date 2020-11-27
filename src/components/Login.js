@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios'
 import {Link, useHistory} from 'react-router-dom'
+import { Form,Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './Login.scss';
+import './ocean.scss';
 
 const Login = props => {
   const [credentials, setCredentials] = useState({ 
@@ -55,33 +59,56 @@ const Login = props => {
             </ul>
           </div>
         )
+        
     return ( 
-      <div>
-        <h1>Log In</h1>        
-          <form onSubmit={handleSubmit}>
-            <input
-              placeholder="name"
-              type="text"
-              name="name"
-              value={name}
+      <>
+      <nav>
+        <h1>Log In</h1> 
+      </nav>
+      
+               
+          <div className='Login'>
+         <Form onSubmit={handleSubmit}>
+         
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>UserName</Form.Label>
+            <Form.Control 
+            placeholder="name"
+            type="text"
+            name="name"
+            value={name}
+            onChange={handleChange} 
+            />
+            
+          </Form.Group>
+
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control 
+              placeholder="password"
+              type="password"
+              name="password"
+              value={password}
               onChange={handleChange}
             />
-          <input
-            placeholder="password"
-            type="password"
-            name="password"
-            value={password}
-            onChange={handleChange}
-          />         
-        <button placeholder="submit" type="submit">
-            Log In
-          </button>          
-          <div>
-            or <Link to='/signup'>sign up</Link>
-          </div>
-          
-         </form>
+          </Form.Group>
+          <Form.Group controlId="formBasicCheckbox">
+            <Form.Check type="checkbox" label="Check me out" />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+          Log In
+          </Button>
+          <Form.Text className="text-muted">
+              or <Link to='/signup'>sign up</Link>
+            </Form.Text>
+        </Form>
+        </div>
+        <div className="ocean">
+        <div className="wave"></div> 
+        <div className="wave"></div>
       </div>
+    
+      </>
   );
 };
 export default Login;

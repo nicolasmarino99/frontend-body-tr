@@ -1,0 +1,23 @@
+nav {
+    display: flex;
+    justify-content: center;
+    background: rgb(44,177,233);
+background: linear-gradient(100deg, rgba(44,177,233,1) 0%, rgba(49,134,215,1) 100%);
+padding: 1.5em;
+color: white;
+    h1 {
+        color: white;
+        font-weight: bold;
+        font-size: 1.5em;
+    }
+    
+}
+.Login, .Signup {
+    margin: 6vh auto;
+    width: 60%;
+    Button {
+        background-color:#f94d87;
+        border: none;
+        width: 100%;
+    }
+}

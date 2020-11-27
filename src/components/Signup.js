@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios'
 import { useHistory } from 'react-router';
+import { Form,Button,Row,Col } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './ocean.scss';
+import './Login.scss';
 
 const Signup = props => {
     const [credentials, setCredentials] = useState({ 
@@ -64,61 +68,121 @@ const Signup = props => {
             </div>
           )
   return ( 
-      
-    <div>
-      
-    <h1>Sign Up</h1>        
-    <form onSubmit={handleSubmit}>
-      <input
-        placeholder="name"
-        type="text"
-        name="name"
-        value={name}
-        onChange={handleChange}
-      />
-      <input
-        placeholder="email"
-        type="text"
-        name="email"
-        value={email}
-        onChange={handleChange}
-      />
-      <input 
-        placeholder="password"
-        type="password"
-        name="password"
-        value={password}
-        onChange={handleChange}
-      />          
-      <input
-        placeholder="password confirmation"
-        type="password"
-        name="password_confirmation"
-        value={password_confirmation}
-        onChange={handleChange}
-      />
-      <input
-        placeholder="weight"
-        type="number"
-        name="weight"
-        value={weight}
-        onChange={handleChange}
-      />
-      <input
-        placeholder="height"  
-        type="number"
-        name="height"
-        value={height}
-        onChange={handleChange}
-      />
     
-      <button placeholder="submit" type="submit">
-        Sign Up
-      </button>
-    </form>
+    <>
+      <nav>
+        <h1>Sign Up</h1>
+      </nav>
+
+    <div className='Signup'>
+      
+            
     
-  </div>
-      );
+
+      <Form onSubmit={handleSubmit}>
+      <Row>
+          <Col>
+          <Form.Group controlId="formBasicEmail" >
+            <Form.Label>Username</Form.Label>
+            <Form.Control 
+            placeholder="name"
+            type="text"
+            name="name"
+            value={name}
+            onChange={handleChange}
+            />
+            
+            
+          </Form.Group>
+          </Col>
+          <Col>
+          <Form.Group controlId="formBasicEmail" onSubmit={handleSubmit}>
+            <Form.Label>Email</Form.Label>
+            <Form.Control 
+            placeholder="email"
+            type="text"
+            name="email"
+            value={email}
+            onChange={handleChange}
+            />
+            
+          </Form.Group>
+          </Col>
+          </Row>
+
+          <Row>
+          <Col>
+
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control 
+              placeholder="password"
+              type="password"
+              name="password"
+              value={password}
+              onChange={handleChange}
+            />
+            
+          </Form.Group>
+          </Col>
+          </Row>
+          <Row>
+          <Col>
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Password confirmation</Form.Label>
+            <Form.Control 
+              placeholder="Password confirmation"
+              type="password"
+              name="Password confirmation"
+              value={password_confirmation}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          </Col>
+          </Row>
+          <Row>
+          <Col>
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Height</Form.Label>
+            <Form.Control 
+              placeholder="height"  
+              type="number"
+              name="height"
+              value={height}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          </Col>
+          <Col>
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Weight</Form.Label>
+            <Form.Control 
+              placeholder="height"  
+              type="number"
+              name="Weight"
+              value={weight}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          </Col>
+          </Row>
+          <Button variant="primary" type="submit">
+          Signup
+          </Button>
+          
+        </Form>
+    
+  
+      </div>
+
+      <div className="ocean">
+        <div className="wave"></div> 
+        <div className="wave"></div>
+      </div>
+
+    </>
+    
+    );
     
   };
   export default Signup;
