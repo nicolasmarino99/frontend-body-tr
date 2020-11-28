@@ -1,3 +1,7 @@
 .Dashboard {
-    margin: 20vw;
+    margin: 12vh 3vh 0 11vh;
+    .Progress {
+        display: flex;
+        justify-content: space-between;
+    }
 }

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import classNames from "classnames";
+
 import { Link, BrowserRouter as Router } from "react-router-dom";
 import { makeStyles } from "@material-ui/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -61,7 +62,7 @@ const useStyles = makeStyles(theme => ({
 
 function SideNav(props) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
 
   function handleDrawerOpen() {
     setOpen(true);
@@ -73,7 +74,7 @@ function SideNav(props) {
 
   return (
     <MuiThemeProvider theme={(props.themes && (props.themes[1] ? props.themes[0][1] : props.themes[0][0]) || null)}>
-      <Router>
+     
         <div className={classes.root}>
           <Drawer
             variant="permanent"
@@ -96,7 +97,7 @@ function SideNav(props) {
                 color="inherit"
                 noWrap
               >
-                Pilz
+                Menu
               </Typography>
               <div
                 className={classNames({
@@ -145,10 +146,14 @@ function SideNav(props) {
                 </List>
                 {index !== props.entries.length - 1 && <Divider />}
               </div>
+              
             ))}
+            <Divider />
+            
+
           </Drawer>
         </div>
-      </Router>
+     
     </MuiThemeProvider>
   );
 }

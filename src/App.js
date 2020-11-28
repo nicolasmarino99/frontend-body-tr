@@ -42,7 +42,7 @@ const App = props => {
 };
   console.log(user)
   return (
-    <div>
+    <div className="App">
         <BrowserRouter>
         <Switch>
           <Route path="/" exact >

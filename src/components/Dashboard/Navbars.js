@@ -100,7 +100,7 @@ function Navbars(props) {
               color="inherit"
               noWrap
             >
-              Pilz
+              App trainer
             </Typography>
             <div className={classes.growA} />
             <Typography

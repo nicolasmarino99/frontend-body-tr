@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Navbar, NavDropdown,Nav } from 'react-bootstrap';
-import {Link} from 'react-router-dom'
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 //import MainFrame from "./main-frame";
@@ -14,6 +14,9 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import './Dashboard.scss'
+import { Link } from 'react-router-dom';
+import ProgressCircle from './ProgressCircle';
+import Categories from './Categories';
 
 const Dashboard = ({user}) => {
     const theme = createMuiTheme({
@@ -55,13 +58,17 @@ const Dashboard = ({user}) => {
       };
 
     const entries = [
-        [["Inbox", <InboxIcon />, "/inbox"], ["Starred", <MailIcon />, "/starred"]],
+        [
+          ["Inbox", <InboxIcon />, "/inbox"], 
+          ["Starred", <MailIcon />, "/starred"]
+        ],
         [
           ["All mail", <CancelIcon />, "/all"],
           ["Trash", <AnnouncementIcon />, "/trash"]
         ],
-        [["Own", <OpenInNewIcon />, "/own"]]
+        [["logout", <OpenInNewIcon />, "/logout"]]
       ];
+       
 
     return (
         <>
@@ -75,11 +82,17 @@ const Dashboard = ({user}) => {
           themes={[[theme, themeB], darkModeToggled]}
           navToggled={NavToggled}
         />
-        <div className="Dashboard">
         
-        <h1>Hello {user.name}</h1>
+        <div className="Dashboard"> 
+          <div className='Progress'>
+            <ProgressCircle numbers={[user.height, 100]} strokeWidth={10}/> 
+            <ProgressCircle numbers={[user.weight, 100]} strokeWidth={10}/> 
+            <ProgressCircle numbers={[user.height, 100]} strokeWidth={10}/> 
           </div>
-        
+            <h1>Hello {user.name}</h1>
+            <Categories />
+          </div>
+          
       </ThemeProvider>
        
         
