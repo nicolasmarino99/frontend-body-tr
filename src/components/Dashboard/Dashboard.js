@@ -59,7 +59,7 @@ const Dashboard = ({user}) => {
 
     const entries = [
         [
-          ["Inbox", <InboxIcon />, "/inbox"], 
+          ["Inbox", <InboxIcon />, "/categories"], 
           ["Starred", <MailIcon />, "/starred"]
         ],
         [

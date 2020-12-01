@@ -10,7 +10,11 @@ html, body {
         }
     }
 }
-.Categories {
+.categories {
     display: flex;
+    height: 50%;
+    justify-content: center;
     flex-wrap: wrap;
+    flex-direction: column;
+    
 }

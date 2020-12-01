@@ -51,10 +51,13 @@ const App = props => {
           <Route path="/signup" exact >
             <Signup handleLogin={handleLogin}/>
           </Route>
-          <Route path="/login" exact >
+          <Route path="/categories" exact >
             <Login handleLogin={handleLogin}/>
           </Route>
     
+          <Route path="/logout" exact >
+              <Logout handleLogout={handleLogout}/>
+          </Route>
           <Route path="/logout" exact >
               <Logout handleLogout={handleLogout}/>
           </Route>
