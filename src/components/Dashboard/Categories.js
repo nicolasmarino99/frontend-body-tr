@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import styled, { keyframes } from 'styled-components';
 import axios from 'axios';
 import './Categories.scss';
-import { Context } from './Store/CategoriesStore';
+import { CategoriesContext } from './Store/CategoriesStore';
 import { Redirect, useHistory, useRouteMatch } from 'react-router';
 import { Link } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ const Categories = () => {
    const {path,url} = useRouteMatch()
    console.log(url,'url', path,'path') 
 
-   const [state, setState] = useContext(Context)
+   const [categories, setCategories] = useContext(CategoriesContext)
     
     const CategoryCont = styled.div`
         background: url(${props => props.img});
@@ -52,7 +52,7 @@ const Categories = () => {
         const clientIDKey = '5phIk2Z31V96pArCaFDbgnDH0rG6gJZ7NMaCr4R3CEg';
       const ulr2 = `https://api.unsplash.com/search/photos/?client_id=${clientIDKey}&query=${name}`;
       const img = (await axios.get(ulr2)).data.results[0].urls.thumb;
-      setState([...state,{name, img}])
+      setCategories([...categories,{name, img}])
     }
     
     //const handleCategoryClick = category => {
@@ -70,7 +70,7 @@ const Categories = () => {
         <>
         <h2>Your categories</h2>
         <div className="categories">
-        {state.map((cate, i) =>(
+        {categories.map((cate, i) =>(
           <Link to={`/category/${cate.name}`}>
             <CategoryCont img={cate.img} num={i}>
               {cate.name}
