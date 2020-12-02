@@ -4,9 +4,10 @@ import { CategoryContext } from './Store/CategoryStore';
 const Category = ({}) => {
     
     const [category, setcategory] = useContext(CategoryContext)
+
     return (
         <div>
-            
+            {category.name}
         </div>
     );
 }

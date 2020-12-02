@@ -17,6 +17,7 @@ import './Dashboard.scss'
 import { Link } from 'react-router-dom';
 import ProgressCircle from './ProgressCircle';
 import Categories from './Categories';
+import CategoryStore from './Store/CategoryStore';
 
 const Dashboard = ({user}) => {
     const theme = createMuiTheme({
@@ -90,7 +91,9 @@ const Dashboard = ({user}) => {
             <ProgressCircle numbers={[user.height, 100]} strokeWidth={10}/> 
           </div>
             <h1>Hello {user.name}</h1>
-            <Categories />
+            <CategoryStore>
+              <Categories />
+            </CategoryStore>
           </div>
           
       </ThemeProvider>

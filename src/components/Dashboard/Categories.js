@@ -13,6 +13,7 @@ const Categories = () => {
    console.log(url,'url', path,'path') 
 
    const [categories, setCategories] = useContext(CategoriesContext)
+   const [category, setCategory] = useContext(CategoriesContext)
     
     const CategoryCont = styled.div`
         background: url(${props => props.img});
@@ -70,10 +71,10 @@ const Categories = () => {
         <>
         <h2>Your categories</h2>
         <div className="categories">
-        {categories.map((cate, i) =>(
-          <Link to={`/category/${cate.name}`}>
-            <CategoryCont img={cate.img} num={i}>
-              {cate.name}
+        {categories.map((category, i) =>(
+          <Link to={`/category/${category.name}`} onClick={setCategory(category)}>
+            <CategoryCont img={category.img} num={i}>
+              {category.name}
             </CategoryCont>
           </Link>
           ))}
