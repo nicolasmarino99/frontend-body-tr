@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom'
-import CategoryStore from './Dashboard/CategoryStore';
+import CategoryStore from './Dashboard/Store/CategoriesStore';
 import Dashboard from './Dashboard/Dashboard';
 import Login from './Login';
 import './ocean.scss';

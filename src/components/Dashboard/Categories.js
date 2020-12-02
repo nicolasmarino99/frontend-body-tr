@@ -3,12 +3,16 @@ import AddIcon from '@material-ui/icons/Add';
 import styled, { keyframes } from 'styled-components';
 import axios from 'axios';
 import './Categories.scss';
-import { Context } from './CategoryStore';
+import { Context } from './Store/CategoriesStore';
+import { Redirect, useHistory, useRouteMatch } from 'react-router';
+import { Link } from 'react-router-dom';
 
 
 const Categories = () => {
-   
-    const [state, setState] = useContext(Context)
+   const {path,url} = useRouteMatch()
+   console.log(url,'url', path,'path') 
+
+   const [state, setState] = useContext(Context)
     
     const CategoryCont = styled.div`
         background: url(${props => props.img});
@@ -50,14 +54,28 @@ const Categories = () => {
       const img = (await axios.get(ulr2)).data.results[0].urls.thumb;
       setState([...state,{name, img}])
     }
+    
+    //const handleCategoryClick = category => {
+    //  const url = http://localhost:3001/api/v1/users/1/categorys/1
+    //  const catId = await axios.get(ulr2)
+    //}
+    //let history = useHistory()
+
+    //const enterToCategory = ({name, img}) => {
+    //  
+    //history.push(`category/${name}`)
+    //}
+    
     return (
         <>
         <h2>Your categories</h2>
         <div className="categories">
         {state.map((cate, i) =>(
+          <Link to={`/category/${cate.name}`}>
             <CategoryCont img={cate.img} num={i}>
               {cate.name}
             </CategoryCont>
+          </Link>
           ))}
                     
         </div>

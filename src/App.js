@@ -6,11 +6,17 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import Logout from './components/Logout';
 import Home from './components/Home';
+import Dashboard from './components/Dashboard/Dashboard';
+import { UserContext } from './components/Dashboard/Store/UserStore';
+
+import Category from './components/Dashboard/Category';
+import CategoryStore from './components/Dashboard/Store/CategoryStore';
+
 
 const App = props => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [user, setUser] = useState({})
-
+  const [user, setUser] = useState(UserContext)
+  
   const handleLogin = data => { 
     setIsLoggedIn(true)
     setUser(data.data.user)
@@ -40,6 +46,8 @@ const App = props => {
         console.error(err);
     }
 };
+Category
+
   console.log(user)
   return (
     <div className="App">
@@ -51,8 +59,10 @@ const App = props => {
           <Route path="/signup" exact >
             <Signup handleLogin={handleLogin}/>
           </Route>
-          <Route path="/categories" exact >
-            <Login handleLogin={handleLogin}/>
+          <Route path='/category/:name' exact >
+          <CategoryStore>
+            <Category/>
+          </CategoryStore>
           </Route>
     
           <Route path="/logout" exact >
