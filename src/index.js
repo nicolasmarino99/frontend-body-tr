@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import CategoriesStore from './components/Dashboard/Store/CategoriesStore';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <CategoriesStore>
+      <App />
+    </CategoriesStore>
   </React.StrictMode>,
   document.getElementById('root')
 );

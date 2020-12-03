@@ -3,10 +3,10 @@ import React, { createContext, useState } from 'react';
 export const UserContext = createContext({});
 
 const UserStore = ({children}) => {
-    const [state, setstate] = useState(initialState)
-    return <Context.Provider value={[state, setstate]}>
+    const [state, setstate] = useState({})
+    return <UserContext.Provider value={[state, setstate]}>
             {children}
-            </Context.Provider>
+            </UserContext.Provider>
 }
 
 export default UserStore;

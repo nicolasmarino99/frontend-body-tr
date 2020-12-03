@@ -8,11 +8,7 @@ import './ocean.scss';
 const Home = ({user, isLoggedIn}) => (
      
     <div className="Home">
-      {isLoggedIn ? 
-        <CategoryStore>
-          <Dashboard user={user}/>
-        </CategoryStore>
-         : <Login />}
+      {isLoggedIn ? <Dashboard user={user}/> : <Login />}
 
       
     </div>

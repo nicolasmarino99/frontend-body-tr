@@ -11,6 +11,7 @@ import { UserContext } from './components/Dashboard/Store/UserStore';
 
 import Category from './components/Dashboard/Category';
 import CategoryStore from './components/Dashboard/Store/CategoryStore';
+import CategoriesStore from './components/Dashboard/Store/CategoriesStore';
 
 
 const App = props => {
@@ -46,11 +47,13 @@ const App = props => {
         console.error(err);
     }
 };
-Category
+
 
   console.log(user)
   return (
+    
     <div className="App">
+      
         <BrowserRouter>
         <Switch>
           <Route path="/" exact >
@@ -60,20 +63,18 @@ Category
             <Signup handleLogin={handleLogin}/>
           </Route>
           <Route path='/category/:name' exact >
-          <CategoryStore>
+          
             <Category/>
-          </CategoryStore>
+          
           </Route>
     
-          <Route path="/logout" exact >
-              <Logout handleLogout={handleLogout}/>
-          </Route>
           <Route path="/logout" exact >
               <Logout handleLogout={handleLogout}/>
           </Route>
         </Switch>
       </BrowserRouter>
     </div>
+    
   );
   
 };

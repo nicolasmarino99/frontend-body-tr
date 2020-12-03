@@ -6,14 +6,15 @@ import './Categories.scss';
 import { CategoriesContext } from './Store/CategoriesStore';
 import { Redirect, useHistory, useRouteMatch } from 'react-router';
 import { Link } from 'react-router-dom';
+import { CategoryContext } from './Store/CategoryStore';
 
 
 const Categories = () => {
    const {path,url} = useRouteMatch()
-   console.log(url,'url', path,'path') 
+   //console.log(url,'url', path,'path') 
 
    const [categories, setCategories] = useContext(CategoriesContext)
-   const [category, setCategory] = useContext(CategoriesContext)
+   //const [category, setCategory] = useContext(CategoryContext)
     
     const CategoryCont = styled.div`
         background: url(${props => props.img});
@@ -56,23 +57,16 @@ const Categories = () => {
       setCategories([...categories,{name, img}])
     }
     
-    //const handleCategoryClick = category => {
-    //  const url = http://localhost:3001/api/v1/users/1/categorys/1
-    //  const catId = await axios.get(ulr2)
-    //}
-    //let history = useHistory()
-
-    //const enterToCategory = ({name, img}) => {
-    //  
-    //history.push(`category/${name}`)
-    //}
     
+    
+   
+    console.log(categories, 'asd')
     return (
         <>
         <h2>Your categories</h2>
         <div className="categories">
         {categories.map((category, i) =>(
-          <Link to={`/category/${category.name}`} onClick={setCategory(category)}>
+          <Link to={`/category/${category.name}`}>
             <CategoryCont img={category.img} num={i}>
               {category.name}
             </CategoryCont>
