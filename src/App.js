@@ -10,11 +10,13 @@ import Dashboard from './components/Dashboard/Dashboard';
 import { UserContext } from './components/Dashboard/Store/UserStore';
 
 import Category from './components/Dashboard/Category';
-import CategoryStore from './components/Dashboard/Store/CategoryStore';
-import CategoriesStore from './components/Dashboard/Store/CategoriesStore';
+import ItemsStore from './components/Dashboard/Store/ItemsStore';
+import Item from './components/Dashboard/Item';
+
 
 
 const App = props => {
+  
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [user, setUser] = useState(UserContext)
   
@@ -27,6 +29,7 @@ const App = props => {
     setIsLoggedIn(false)
     setUser({})
   }
+  
   useEffect(() => {
     sendGetRequest()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -66,6 +69,11 @@ const App = props => {
           
             <Category/>
           
+          </Route>
+          <Route path='/category/:name/:name' exact >
+            
+              <Item/>
+            
           </Route>
     
           <Route path="/logout" exact >

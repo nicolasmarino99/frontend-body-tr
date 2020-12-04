@@ -6,7 +6,7 @@ import './Categories.scss';
 import { CategoriesContext } from './Store/CategoriesStore';
 import { Redirect, useHistory, useRouteMatch } from 'react-router';
 import { Link } from 'react-router-dom';
-import { CategoryContext } from './Store/CategoryStore';
+
 
 
 const Categories = () => {

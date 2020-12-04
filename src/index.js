@@ -4,11 +4,14 @@ import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import CategoriesStore from './components/Dashboard/Store/CategoriesStore';
+import ItemsStore from './components/Dashboard/Store/ItemsStore';
 
 ReactDOM.render(
   <React.StrictMode>
     <CategoriesStore>
+    <ItemsStore>
       <App />
+    </ItemsStore>
     </CategoriesStore>
   </React.StrictMode>,
   document.getElementById('root')

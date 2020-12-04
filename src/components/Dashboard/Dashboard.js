@@ -17,8 +17,7 @@ import './Dashboard.scss'
 import { Link } from 'react-router-dom';
 import ProgressCircle from './ProgressCircle';
 import Categories from './Categories';
-import CategoryStore from './Store/CategoryStore';
-import CategoriesStore from './Store/CategoriesStore';
+
 
 const Dashboard = ({user}) => {
     const theme = createMuiTheme({
