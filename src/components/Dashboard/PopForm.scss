@@ -1,0 +1,36 @@
+@keyframes translate {
+    from {transform: translateY(30px);}
+    to {transform: translateY(0);}
+  }
+
+.Form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    h1 {
+        font-size: 20px;
+        margin-bottom: 1em;
+        color: white;
+    }
+    form {
+        background: #1c94c4;
+        width: 75%;
+        padding: 2em;
+        border-radius: 10px;
+        z-index: 3;
+        position: absolute;
+        top: 44%;
+        animation: translate 2s ease;
+    }
+    .Form-cover {
+        
+    position: absolute;
+    background: #00000063;
+    top: 0;
+    right: 0;
+    width: 86%;
+    height: 100%;
+    
+    }
+} 

@@ -36,13 +36,13 @@ const Category = () => {
 `;
 
 const handleClick = async () =>{
-    const name = 'running'
+    const name = 'push-ups'
     const clientIDKey = '5phIk2Z31V96pArCaFDbgnDH0rG6gJZ7NMaCr4R3CEg';
     const ulr2 = `https://api.unsplash.com/search/photos/?client_id=${clientIDKey}&query=${name}`;
     const img = (await axios.get(ulr2)).data.results[0].urls.thumb;
     setItems([...items,{name, img}])
     }
-
+    
     return (
         <div>
             <h1>{category.name}</h1>

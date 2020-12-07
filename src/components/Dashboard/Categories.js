@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import styled, { keyframes } from 'styled-components';
 import axios from 'axios';
 import './Categories.scss';
+import './PopForm.scss';
 import { CategoriesContext } from './Store/CategoriesStore';
 import { Redirect, useHistory, useRouteMatch } from 'react-router';
 import { Link } from 'react-router-dom';
@@ -15,7 +16,8 @@ const Categories = () => {
 
    const [categories, setCategories] = useContext(CategoriesContext)
    //const [category, setCategory] = useContext(CategoryContext)
-    
+    const [showForm, setshowForm] = useState(false)
+    const [category, setCategory] = useState('')
     const CategoryCont = styled.div`
         background: url(${props => props.img});
         background-size: cover;
@@ -29,6 +31,8 @@ const Categories = () => {
         width: 8em;
         background-color: #59c584;
         border-radius: 10px;
+    `;
+    const Form = styled.div`
     `;
    
     /*
@@ -49,7 +53,10 @@ const Categories = () => {
         }
         
       }*/   
-      const handleClick = async () =>{
+      const handleClick = () => {
+        setshowForm(true)
+      }
+      const handleClickForm = async () => {
         const name = 'running'
         const clientIDKey = '5phIk2Z31V96pArCaFDbgnDH0rG6gJZ7NMaCr4R3CEg';
       const ulr2 = `https://api.unsplash.com/search/photos/?client_id=${clientIDKey}&query=${name}`;
@@ -57,7 +64,28 @@ const Categories = () => {
       setCategories([...categories,{name, img}])
     }
     
-    
+    const onEnterPress = (e) => {
+      if(e.keyCode == 13 && e.shiftKey == false) {
+        e.preventDefault();
+        this.myFormRef.submit();
+      }
+    }
+
+    const handleChange = event => {
+      setCategory(event.target.value);
+    }
+
+    const PopForm = () => (
+      <div className="Form">
+      <div className="Form-cover" onClick={() => setshowForm(false)}>
+        
+      </div>
+        <form onKeyDown={onEnterPress}>
+        <h1>Add another category</h1>
+        <input type="text" id="category-name" name="name"/>
+      </form>
+    </div>
+    );
     
    
     console.log(categories, 'asd')
@@ -75,6 +103,7 @@ const Categories = () => {
                     
         </div>
         <button className='add-category' onClick={handleClick}><AddIcon /></button>
+        {showForm ? <PopForm /> : ''}
         </>
     );
 }
