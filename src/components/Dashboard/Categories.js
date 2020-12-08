@@ -13,10 +13,10 @@ import { Link } from 'react-router-dom';
 const Categories = () => {
    const {path,url} = useRouteMatch()
    //console.log(url,'url', path,'path') 
-
+  const [showForm, setshowForm] = useState(false)
    const [categories, setCategories] = useContext(CategoriesContext)
    //const [category, setCategory] = useContext(CategoryContext)
-    const [showForm, setshowForm] = useState(false)
+    
 
    
     
@@ -24,7 +24,10 @@ const Categories = () => {
     const CategoryCont = styled.div`
         background: url(${props => props.img});
         background-size: cover;
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
         margin: 7px 0;
+        letter-spacing: 1px;
         color: white;
         display: flex;
         font-weight: bold;
@@ -35,8 +38,7 @@ const Categories = () => {
         background-color: #59c584;
         border-radius: 10px;
     `;
-    const Form = styled.div`
-    `;
+    
    
     /*
       const getCategoriesRequests = async (id) => {
@@ -74,6 +76,7 @@ const Categories = () => {
     
 //onChange={handleChange}
     const PopForm = () => {
+       
        const [category, setCategory] = useState('')
       
       const handleChange = e => {
@@ -85,37 +88,36 @@ const Categories = () => {
         handleClickForm(category)
         setshowForm(false)
       }
-      
-      return (
+
+    return (
       <div className="Form" >
-      <div className="Form-cover" onClick={() => setshowForm(false)}>
-        
+        <div className="Form-cover" onClick={() => setshowForm(false)}>
+        </div>
+        <form onSubmit={onEnterPress}>
+          <h1>Add another category</h1>
+          <input type="text" id="category-name" name="name" onChange={handleChange}/>
+        </form>
       </div>
-      <form onSubmit={onEnterPress}>
-        <h1>Add another category</h1>
-        <input type="text" id="category-name" name="name" onChange={handleChange}/>
-      </form>
-    </div>
     )};
-    
-   
+
     console.log(categories, 'asd')
     return (
-        <>
+      <>
         <h2>Your categories</h2>
         <div className="categories">
-        {categories.map((category, i) =>(
-          <Link to={`/category/${category.name}`}>
-            <CategoryCont img={category.img} num={i}>
-              {category.name}
-            </CategoryCont>
-          </Link>
-          ))}
-                    
+          <div className="categories-container">
+              {categories.map((category, i) =>(
+                <Link to={`/category/${category.name}`}>
+                  <CategoryCont img={category.img} num={i}>
+                    {category.name}
+                  </CategoryCont>
+                </Link>
+              ))}
+            </div>
         </div>
         <button className='add-category' onClick={handleClick}><AddIcon /></button>
         {showForm ? <PopForm /> : ''}
-        </>
+      </>
     );
 }
 

@@ -16,5 +16,12 @@ html, body {
     justify-content: center;
     flex-wrap: wrap;
     flex-direction: column;
+    overflow: auto;
+    a {
+        background: rgba(0, 0, 0, 0.219);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     
 }

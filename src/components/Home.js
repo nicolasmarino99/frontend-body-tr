@@ -6,13 +6,9 @@ import Login from './Login';
 import './ocean.scss';
 
 const Home = ({user, isLoggedIn}) => (
-     
-    <div className="Home">
-      {isLoggedIn ? <Dashboard user={user}/> : <Login />}
-
-      
-    </div>
-      
-  );
+  <div className="Home">
+    {isLoggedIn ? <Dashboard user={user}/> : <Login />}
+  </div>
+);
 
 export default Home;
