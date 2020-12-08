@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import styled, { keyframes } from 'styled-components';
 import axios from 'axios';
@@ -17,7 +17,10 @@ const Categories = () => {
    const [categories, setCategories] = useContext(CategoriesContext)
    //const [category, setCategory] = useContext(CategoryContext)
     const [showForm, setshowForm] = useState(false)
-    const [category, setCategory] = useState('')
+
+   
+    
+    
     const CategoryCont = styled.div`
         background: url(${props => props.img});
         background-size: cover;
@@ -56,36 +59,44 @@ const Categories = () => {
       const handleClick = () => {
         setshowForm(true)
       }
-      const handleClickForm = async () => {
-        const name = 'running'
+      const handleClickForm = async name => {
         const clientIDKey = '5phIk2Z31V96pArCaFDbgnDH0rG6gJZ7NMaCr4R3CEg';
-      const ulr2 = `https://api.unsplash.com/search/photos/?client_id=${clientIDKey}&query=${name}`;
-      const img = (await axios.get(ulr2)).data.results[0].urls.thumb;
-      setCategories([...categories,{name, img}])
+        const ulr2 = `https://api.unsplash.com/search/photos/?client_id=${clientIDKey}&query=${name}`;
+        const img = (await axios.get(ulr2)).data.results[0].urls.thumb;
+        setCategories([...categories,{name, img}])
     }
     
-    const onEnterPress = (e) => {
-      if(e.keyCode == 13 && e.shiftKey == false) {
-        e.preventDefault();
-        this.myFormRef.submit();
+    
+
+    
+    
+
+    
+//onChange={handleChange}
+    const PopForm = () => {
+       const [category, setCategory] = useState('')
+      
+      const handleChange = e => {
+        console.log(e, 'target', category)
+        setCategory(e.target.value);
       }
-    }
-
-    const handleChange = event => {
-      setCategory(event.target.value);
-    }
-
-    const PopForm = () => (
-      <div className="Form">
+      const onEnterPress = e => {
+        e.preventDefault();
+        handleClickForm(category)
+        setshowForm(false)
+      }
+      
+      return (
+      <div className="Form" >
       <div className="Form-cover" onClick={() => setshowForm(false)}>
         
       </div>
-        <form onKeyDown={onEnterPress}>
+      <form onSubmit={onEnterPress}>
         <h1>Add another category</h1>
-        <input type="text" id="category-name" name="name"/>
+        <input type="text" id="category-name" name="name" onChange={handleChange}/>
       </form>
     </div>
-    );
+    )};
     
    
     console.log(categories, 'asd')
