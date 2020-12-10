@@ -7,6 +7,7 @@ import './PopForm.scss';
 import { CategoriesContext } from './Store/CategoriesStore';
 import { Redirect, useHistory, useRouteMatch } from 'react-router';
 import { Link } from 'react-router-dom';
+import { Paragraph } from './StyledComponents/Components';
 
 
 
@@ -20,7 +21,10 @@ const Categories = () => {
 
    
     
-    
+    const selectBigCards = () => {
+      const bigOnes = new Array(50).fill(0);
+      return bigOnes.map((x, i) => i % 2 === 1 ? i+3 : i+1).push(0)
+    }
     const CategoryCont = styled.div`
         background: url(${props => props.img});
         background-size: cover;
@@ -33,7 +37,7 @@ const Categories = () => {
         font-weight: bold;
         align-items: center;
         justify-content: center;
-        height: ${props => props.num % 3 === 0 ? 8 : 12}em;
+        height: ${props => selectBigCards().includes(props.num) ? 12 : 8}em;
         width: 8em;
         background-color: #59c584;
         border-radius: 10px;
@@ -74,7 +78,7 @@ const Categories = () => {
     
 
     
-//onChange={handleChange}
+
     const PopForm = () => {
        
        const [category, setCategory] = useState('')
@@ -88,7 +92,7 @@ const Categories = () => {
         handleClickForm(category)
         setshowForm(false)
       }
-
+      
     return (
       <div className="Form" >
         <div className="Form-cover" onClick={() => setshowForm(false)}>
@@ -97,7 +101,7 @@ const Categories = () => {
           <h1>Add another category</h1>
           <input type="text" id="category-name" name="name" onChange={handleChange}/>
         </form>
-      </div>
+    </div>
     )};
 
     console.log(categories, 'asd')
@@ -109,7 +113,7 @@ const Categories = () => {
               {categories.map((category, i) =>(
                 <Link to={`/category/${category.name}`}>
                   <CategoryCont img={category.img} num={i}>
-                    {category.name}
+                    <Paragraph>{category.name}</Paragraph>
                   </CategoryCont>
                 </Link>
               ))}

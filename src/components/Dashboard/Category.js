@@ -7,18 +7,18 @@ import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './PopForm.scss';
+import { Paragraph } from './StyledComponents/Components';
 
 
 const Category = () => {
     const [categories, setCategories] = useContext(CategoriesContext)
     const [items, setItems] = useContext(ItemsContext)
     const [showForm, setshowForm] = useState(false)
-    
     let category
     const {url} = useRouteMatch()
     const cleanUrl = url.replace(/category/g, "").replace(/\//g, "");
     category = categories.filter(x => x.name === cleanUrl)[0]
-    console.log(cleanUrl,'url') 
+    console.log(cleanUrl,'url')
     console.log(category)
 
 
@@ -39,6 +39,8 @@ const Category = () => {
     background-color: #59c584;
     border-radius: 10px;
 `;
+
+
 const handleClick = () => {
     setshowForm(true)
   }
@@ -83,11 +85,11 @@ const handleClickForm = async name =>{
             {items.map((item, i) =>(
                 <Link to={`/category/${category.name}/${item.name}`}>
                     <ItemCont img={item.img} num={i}>
-                        {item.name}
+                        
+                        <Paragraph>{item.name}</Paragraph>
                     </ItemCont>
                 </Link>
                 ))}
-                
             </div>
             <button className='add-category' onClick={handleClick}><AddIcon /></button>
             {showForm ? <PopForm /> : ''}
