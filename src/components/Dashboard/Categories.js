@@ -21,10 +21,21 @@ const Categories = () => {
 
    
     
-    const selectBigCards = () => {
-      const bigOnes = new Array(50).fill(0);
-      return bigOnes.map((x, i) => i % 2 === 1 ? i+3 : i+1).push(0)
+    
+   const isBig = x =>{
+    const bigOnes = new Array(50).fill(0);
+    for (let i = 0; i < bigOnes.length; i++) {
+      if (i % 2 === 1) {
+         bigOnes[i] = bigOnes[i-1]+1
+      } else {
+        bigOnes[i] = i-1 === -1 ? 0 : bigOnes[i-1]+3
+      }
+      
     }
+    bigOnes.map(x => x-1)
+    return bigOnes.includes(x)        
+  }
+
     const CategoryCont = styled.div`
         background: url(${props => props.img});
         background-size: cover;
@@ -37,10 +48,12 @@ const Categories = () => {
         font-weight: bold;
         align-items: center;
         justify-content: center;
-        height: ${props => selectBigCards().includes(props.num) ? 12 : 8}em;
+        height: ${props => isBig(props.num) || props.num === 0 ? 12 : 8}em;
         width: 8em;
         background-color: #59c584;
         border-radius: 10px;
+        position: relative;
+        top :${props =>  props.num >= 4 ? -64*(Math.floor(props.num/4)) : 0}px;
     `;
     
    
@@ -112,7 +125,7 @@ const Categories = () => {
           <div className="categories-container">
               {categories.map((category, i) =>(
                 <Link to={`/category/${category.name}`}>
-                  <CategoryCont img={category.img} num={i}>
+                  <CategoryCont img={category.img} num={i+1}>
                     <Paragraph>{category.name}</Paragraph>
                   </CategoryCont>
                 </Link>

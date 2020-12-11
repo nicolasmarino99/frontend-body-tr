@@ -7,7 +7,9 @@ import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './PopForm.scss';
+import './Category.scss';
 import { Paragraph } from './StyledComponents/Components';
+import ClearIcon from '@material-ui/icons/Clear';
 
 
 const Category = () => {
@@ -28,16 +30,17 @@ const Category = () => {
     text-transform: uppercase;
     letter-spacing: 1px;
     background-size: cover;
-    margin: 7px 0;
+    margin: 1em ;
     color: white;
     display: flex;
     font-weight: bold;
     align-items: center;
     justify-content: center;
-    height: ${props => props.num % 3 === 0 ? 8 : 12}em;
-    width: 8em;
+    height: 9em;
+    width: 80%;
     background-color: #59c584;
     border-radius: 10px;
+    margin: 1em auto;
 `;
 
 
@@ -78,18 +81,51 @@ const handleClickForm = async name =>{
 
 
     return (
-        <div>
-            <h1>{category.name}</h1>
+        <div className="Category">
+          <div className="header">
             <img src={category.img}/>
-            <div className="items">
-            {items.map((item, i) =>(
-                <Link to={`/category/${category.name}/${item.name}`}>
-                    <ItemCont img={item.img} num={i}>
-                        
-                        <Paragraph>{item.name}</Paragraph>
-                    </ItemCont>
-                </Link>
-                ))}
+            <h1>{category.name}</h1>
+            <Link to='/'><ClearIcon /></Link>
+          </div>
+          <div className="details">
+            <div className="social">
+              <button className="follow">Follow <AddIcon /></button>
+              <div className="tags">
+                <p>Fitness</p>
+                <p>Cardio</p>
+              </div>
+              
+            </div>
+            <div className="members">
+                <button></button>
+                <button></button>
+                <button></button>
+                <button></button>
+                <p>1320 members</p>
+              </div>
+            <div className="options">
+                <button>Workouts</button>
+                <button>Live Class</button>
+                <button>Leaderboard</button>
+            </div>
+              <div className="items">
+              {items.map((item, i) =>(
+                  <Link to={`/category/${category.name}/${item.name}`}>
+                    
+                    
+                      <ItemCont img={item.img} num={i}>
+                          
+                          <Paragraph>
+                          <p className="time">8 minutes</p>
+                            {item.name}
+                            
+                            <p className="difficulty-tag">easy</p>
+                          </Paragraph>
+                          
+                      </ItemCont>
+                  </Link>
+                  ))}
+              </div>
             </div>
             <button className='add-category' onClick={handleClick}><AddIcon /></button>
             {showForm ? <PopForm /> : ''}

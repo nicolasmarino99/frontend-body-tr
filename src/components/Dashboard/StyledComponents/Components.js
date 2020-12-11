@@ -11,6 +11,8 @@ justify-content: center;
 align-items: center;
 margin-top: 15px;
 border-radius: 6%;
+display: flex;
+flex-direction: column-reverse;
 `;
 
 export {Paragraph}
