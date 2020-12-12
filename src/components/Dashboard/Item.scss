@@ -1,4 +1,4 @@
-.Category {
+.Item {
     .difficulty-tag {
         align-self: flex-end;
         padding: 0.5em;
@@ -16,11 +16,11 @@
         h1 {
             text-transform: uppercase;
             color: white;
-            font-family: "Oswald", sans-serif;
+            font-family: 'Oswald', sans-serif;
             position: relative;
-            bottom: 4em;
-            right: 20%;
-            font-size: 45px;
+            bottom: 6.5em;
+            right: 1.5em;
+            font-size: 29px;
         }
         a {
             position: absolute;
@@ -33,7 +33,7 @@
         }
     }
     .details {
-        bottom: 7em;
+        bottom: 10em;
         position: relative;
         background: white;
         .items {
@@ -42,20 +42,22 @@
         }
         .social {
             display: flex;
-            flex-direction: row-reverse;
-            justify-content: space-evenly;
+            font-weight: bold;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
         
             .follow {
-                width: 8em;
-                border-radius: 11px;
-                height: 3em;
+                width: 13em;
+                border-radius: 21px;
+                height: 3.5em;
                 border: none;
                 position: relative;
                 bottom: 1.5em;
-                
                 box-shadow: 1px 5px 14px 7px rgba(0, 0, 0, 0.1);
                 background: white;
-                font-weight: bold;
+                font-weight: bolder;
+                font-size: 1.2em;
                 svg {
                     color: white;
                     background: #3d1e36;
@@ -64,19 +66,31 @@
 
                 }
             }
-            .tags {
+            .description {
+                width: 80%;
+                text-align: -webkit-left;
+                margin: 2em;
+            }
+            .warm-up {
                 display: flex;
+                padding: 1em;
+                align-items: center;
+                background: #f8f8f8;
+                border-radius: 18px;
+                width: 80%;
                 justify-content: space-between;
-                width: 44%;
-                margin-top: 2em;
-                position: relative;
-                left: -1em;
+                margin-top: 1em;
+                .title {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: start;
                 p {
-                    background: #d8d2d7;
-                    border-radius: 10px;
-                    color: #583d52;
-                    font-weight: bold;
-                    padding: 3px 1em;
+                    font-size: 15px;
+                    color: gray;
+                }
+                h2 {
+                    font-size: 25px;
+                }
                 }
             }
         }

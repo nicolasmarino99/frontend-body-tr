@@ -68,7 +68,7 @@ const App = props => {
           <Route path='/category/:name' exact >
           
             <Category/>
-          
+          c
           </Route>
           <Route path='/category/:name/:name' exact >
             

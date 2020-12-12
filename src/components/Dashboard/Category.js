@@ -53,24 +53,22 @@ const handleClickForm = async name =>{
     const img = (await axios.get(ulr2)).data.results[0].urls.thumb;
     setItems([...items,{name, img}])
     }
-    
+
     const PopForm = () => {
-        const [category, setCategory] = useState('')
-       
-       const handleChange = e => {
-         console.log(e, 'target', category)
-         setCategory(e.target.value);
-       }
+      const [category, setCategory] = useState('')
+      const handleChange = e => {
+        console.log(e, 'target', category)
+        setCategory(e.target.value);
+      }
        const onEnterPress = e => {
          e.preventDefault();
          handleClickForm(category)
          setshowForm(false)
        }
-       
+
        return (
        <div className="Form" >
        <div className="Form-cover" style={{width: "100%"}} onClick={() => setshowForm(false)}>
-         
        </div>
        <form onSubmit={onEnterPress}>
          <h1>Add another category</h1>
@@ -94,7 +92,6 @@ const handleClickForm = async name =>{
                 <p>Fitness</p>
                 <p>Cardio</p>
               </div>
-              
             </div>
             <div className="members">
                 <button></button>
@@ -111,17 +108,12 @@ const handleClickForm = async name =>{
               <div className="items">
               {items.map((item, i) =>(
                   <Link to={`/category/${category.name}/${item.name}`}>
-                    
-                    
                       <ItemCont img={item.img} num={i}>
-                          
                           <Paragraph>
                           <p className="time">8 minutes</p>
                             {item.name}
-                            
                             <p className="difficulty-tag">easy</p>
                           </Paragraph>
-                          
                       </ItemCont>
                   </Link>
                   ))}
