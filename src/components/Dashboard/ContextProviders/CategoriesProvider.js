@@ -1,13 +1,13 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useReducer } from 'react';
 
-const initialState = [
-];
+const initialState = {
+    categories: [],
+};
 
-const reducer = (state, action) => {
-    console.log(action, action.type)
+const reducer = (state = [{categories: []}], action) => {
+    console.log(state.categories)
     switch (action.type) {
       case "ADD_CATEGORY":
-          console.log(state, 'asssfsd')
         return {
           categories: [...state.categories, ...action.payload]
         };
@@ -33,7 +33,7 @@ const reducer = (state, action) => {
 export const CategoriesContext = createContext()
 
 const CategoriesProvider = ({children}) => {
-    const [state, dispatch] = useState(reducer,initialState)
+    const [state, dispatch] = useReducer(reducer,initialState)
     return (<CategoriesContext.Provider value={[state, dispatch]}>
             {children}
             </CategoriesContext.Provider>)

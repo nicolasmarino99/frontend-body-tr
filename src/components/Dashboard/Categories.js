@@ -16,10 +16,11 @@ const Categories = () => {
   const [user, setUser] = useContext(UserContext);
   const [showForm, setshowForm] = useState(false);
   const [state, dispatch] = useContext(CategoriesContext);
-
+  
   useEffect(() => {
     getCategoriesRequest()
-  }, [])``
+  }, []);
+
 
   const getCategoriesRequest = async () => {
     try {
@@ -27,6 +28,7 @@ const Categories = () => {
         `http://localhost:3001/api/v1/users/${user.id}/categorys`, 
         {withCredentials: true}
       );
+      console.log(response.data)
       dispatch({
         type: "ADD_CATEGORY",
         payload: [...response.data]
@@ -36,7 +38,7 @@ const Categories = () => {
         console.error(err);
     }
 };
-
+console.log(state.categories, 'sds')
   const makeBig = x => {
     const bigOnes = new Array(50).fill(0);
     for (let i = 0; i < bigOnes.length; i++) {
@@ -89,7 +91,7 @@ const Categories = () => {
           category,
           {withCredentials: true});
           dispatch({
-            type: "ADD_CONTACT",
+            type: "ADD_CATEGORY",
             payload: [response.data]
           });
       } catch (err) {
@@ -125,13 +127,13 @@ const Categories = () => {
         <h2>Your categories</h2>
         <div className="categories">
           <div className="categories-container">
-              {state.categories.map((category, i) =>(
+              {state.categories ? state.categories.map((category, i) =>(
                 <Link to={`/category/${category.name}`}>
                   <CategoryCont img={category.img} num={i+1}>
                     <Paragraph>{category.name}</Paragraph>
                   </CategoryCont>
                 </Link>
-              ))}
+              )) : ''}
             </div>
         </div>
         <button className='add-category' onClick={handleClick}><AddIcon /></button>
