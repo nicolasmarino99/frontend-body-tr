@@ -4,25 +4,46 @@ import styled, { keyframes } from 'styled-components';
 import axios from 'axios';
 import './Categories.scss';
 import './PopForm.scss';
-import { CategoriesContext } from './Store/CategoriesStore';
+import { CategoriesContext } from './ContextProviders/CategoriesProvider';
 import { Redirect, useHistory, useRouteMatch } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Paragraph } from './StyledComponents/Components';
+import { UserContext } from './ContextProviders/UserStore';
 
 
 
 const Categories = () => {
-   const {path,url} = useRouteMatch()
-   //console.log(url,'url', path,'path') 
-  const [showForm, setshowForm] = useState(false)
-   const [categories, setCategories] = useContext(CategoriesContext)
-   //const [category, setCategory] = useContext(CategoryContext)
-    
 
-   
+  const {path,url} = useRouteMatch();
+  const [user, setUser] = useContext(UserContext);
+  const [showForm, setshowForm] = useState(false);
+  const [categories, setCategories] = useContext(CategoriesContext);
+  console.log(user, 'category')
+  useEffect(() => {
+    sendGetRequest()
+    console.log(user, 'category userfdrf')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const sendGetRequest = async () => {
+    try {
+      console.log(user.id, 'category userfdrf')
+        const response = await axios.get(`http://localhost:3001/api/v1/users/${user.id}/categorys`, 
+        {withCredentials: true});
+        
+        //console.log(response, 'categproes')
+        setCategories(response.data)
+          
+          
+        
+    } catch (err) {
+        // Handle Error Here
+        console.error(err);
+    }
+};
     
     
-   const isBig = x =>{
+   const makeBig = x =>{
     const bigOnes = new Array(50).fill(0);
     for (let i = 0; i < bigOnes.length; i++) {
       if (i % 2 === 1) {
@@ -48,7 +69,7 @@ const Categories = () => {
         font-weight: bold;
         align-items: center;
         justify-content: center;
-        height: ${props => isBig(props.num) || props.num === 0 ? 12 : 8}em;
+        height: ${props => makeBig(props.num) || props.num === 0 ? 12 : 8}em;
         width: 8em;
         background-color: #59c584;
         border-radius: 10px;
@@ -57,38 +78,41 @@ const Categories = () => {
     `;
     
    
-    /*
-      const getCategoriesRequests = async (id) => {
-        try {
-            const response = await axios.get(`http://localhost:3001/api/v1/users/${id}/categorys`, 
-            {withCredentials: true});
-            if (response.data.status === 'created') {
-              props.handleLogin(response.data)
-              
-              
-            } else {
-              setCredentials({...credentials, errors: response.data.errors})
-            }
-        } catch (err) {
-            // Handle Error Here
-            console.error(err);
-        }
-        
-      }*/   
+    
+      
       const handleClick = () => {
         setshowForm(true)
       }
+
       const handleClickForm = async name => {
         const clientIDKey = '5phIk2Z31V96pArCaFDbgnDH0rG6gJZ7NMaCr4R3CEg';
         const ulr2 = `https://api.unsplash.com/search/photos/?client_id=${clientIDKey}&query=${name}`;
         const img = (await axios.get(ulr2)).data.results[0].urls.thumb;
-        setCategories([...categories,{name, img}])
+        console.log(user.id, 'category user')
+        postCategory({name,img})
+        
+        
     }
+    console.log(user.id, 'category user')
     
+    const postCategory = async category => {
+      try {
+        console.log(user.id, 'category user')
+          const response = await axios.post(`http://localhost:3001/api/v1/users/${user.id}/categorys`,
+          category,
+          {withCredentials: true});
+          
+          console.log(response.data, 'categproes')
+          setCategories([...categories,response.data])
+            
+            
+          
+      } catch (err) {
+          // Handle Error Here
+          console.error(err);
+      }
     
-
-    
-    
+    }
 
     
 

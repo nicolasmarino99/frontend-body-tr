@@ -26,11 +26,11 @@ console.log(initialState,'initialState')
 
 export const ItemsContext = createContext()
 
-const ItemsStore = ({children}) => {
+const ItemsProvider = ({children}) => {
     const [state, setstate] = useState(initialState)
     return <ItemsContext.Provider value={[state, setstate]}>
             {children}
             </ItemsContext.Provider>
 }
 
-export default ItemsStore;
+export default ItemsProvider;

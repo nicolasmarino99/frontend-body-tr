@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useRouteMatch } from 'react-router';
-import { CategoriesContext } from './Store/CategoriesStore';
-import { ItemsContext } from './Store/ItemsStore';
+import { CategoriesContext } from './ContextProviders/CategoriesProvider';
+import { ItemsContext } from './ContextProviders/ItemsProvider';
 import AddIcon from '@material-ui/icons/Add';
 import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';

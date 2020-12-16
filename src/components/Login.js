@@ -5,6 +5,8 @@ import { Form,Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Login.scss';
 import './ocean.scss';
+import { UserContext } from './Dashboard/ContextProviders/UserStore';
+import { useContext } from 'react';
 
 const Login = props => {
   const [credentials, setCredentials] = useState({ 
@@ -12,6 +14,8 @@ const Login = props => {
     password: '',
     errors: ''
    }) 
+   
+   
    const {name, password} = credentials
 
    const handleChange = event => {
@@ -27,9 +31,8 @@ const Login = props => {
           name: name,
           password: password
         }
-        console.log(user)
         sendPostRequest(user)
-        history.push('/')
+        
     };
     
     
@@ -41,7 +44,9 @@ const Login = props => {
           {withCredentials: true});
           if (response.data.logged_in) {
             props.handleLogin(response.data)
-            console.log(response)
+            console.log(response, 'response')
+           
+            history.push('/')
             
           } else {
             setCredentials({...credentials ,errors: response.data.errors})

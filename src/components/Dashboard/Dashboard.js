@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Navbar, NavDropdown,Nav } from 'react-bootstrap';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -17,9 +17,13 @@ import './Dashboard.scss'
 import { Link } from 'react-router-dom';
 import ProgressCircle from './ProgressCircle';
 import Categories from './Categories';
+import { UserContext } from './ContextProviders/UserStore';
 
 
-const Dashboard = ({user}) => {
+const Dashboard = () => {
+  
+  const [user, setUser] = useContext(UserContext);
+
     const theme = createMuiTheme({
         typography: {
           useNextVariants: true

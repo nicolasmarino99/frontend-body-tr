@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './App.scss';
 import axios from 'axios'
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
@@ -7,10 +7,10 @@ import Signup from './components/Signup';
 import Logout from './components/Logout';
 import Home from './components/Home';
 import Dashboard from './components/Dashboard/Dashboard';
-import { UserContext } from './components/Dashboard/Store/UserStore';
+import { UserContext } from './components/Dashboard/ContextProviders/UserStore';
 
 import Category from './components/Dashboard/Category';
-import ItemsStore from './components/Dashboard/Store/ItemsStore';
+import ItemsStore from './components/Dashboard/ContextProviders/ItemsProvider';
 import Item from './components/Dashboard/Item';
 
 
@@ -18,8 +18,8 @@ import Item from './components/Dashboard/Item';
 const App = props => {
   
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [user, setUser] = useState(UserContext)
-  
+  const [user, setUser] = useContext(UserContext)
+  console.log(user)
   const handleLogin = data => { 
     setIsLoggedIn(true)
     setUser(data.data.user)
@@ -51,8 +51,7 @@ const App = props => {
     }
 };
 
-
-  console.log(user)
+  
   return (
     
     <div className="App">
@@ -60,7 +59,7 @@ const App = props => {
         <BrowserRouter>
         <Switch>
           <Route path="/" exact >
-            <Home user={user} isLoggedIn={isLoggedIn} handleLogout={handleLogout}/>
+            <Home isLoggedIn={isLoggedIn} handleLogout={handleLogout}/>
           </Route>
           <Route path="/signup" exact >
             <Signup handleLogin={handleLogin}/>
@@ -68,7 +67,7 @@ const App = props => {
           <Route path='/category/:name' exact >
           
             <Category/>
-          c
+          
           </Route>
           <Route path='/category/:name/:name' exact >
             
