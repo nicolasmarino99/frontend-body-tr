@@ -10,76 +10,66 @@ import { Link } from 'react-router-dom';
 import { Paragraph } from './StyledComponents/Components';
 import { UserContext } from './ContextProviders/UserStore';
 
-
-
 const Categories = () => {
 
   const {path,url} = useRouteMatch();
   const [user, setUser] = useContext(UserContext);
   const [showForm, setshowForm] = useState(false);
-  const [categories, setCategories] = useContext(CategoriesContext);
-  console.log(user, 'category')
-  useEffect(() => {
-    sendGetRequest()
-    console.log(user, 'category userfdrf')
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  const [state, dispatch] = useContext(CategoriesContext);
 
-  const sendGetRequest = async () => {
+  useEffect(() => {
+    getCategoriesRequest()
+  }, [])``
+
+  const getCategoriesRequest = async () => {
     try {
-      console.log(user.id, 'category userfdrf')
-        const response = await axios.get(`http://localhost:3001/api/v1/users/${user.id}/categorys`, 
-        {withCredentials: true});
-        
-        //console.log(response, 'categproes')
-        setCategories(response.data)
-          
-          
-        
+      const response = await axios.get(
+        `http://localhost:3001/api/v1/users/${user.id}/categorys`, 
+        {withCredentials: true}
+      );
+      dispatch({
+        type: "ADD_CATEGORY",
+        payload: [...response.data]
+      });
+
     } catch (err) {
-        // Handle Error Here
         console.error(err);
     }
 };
-    
-    
-   const makeBig = x =>{
+
+  const makeBig = x => {
     const bigOnes = new Array(50).fill(0);
     for (let i = 0; i < bigOnes.length; i++) {
       if (i % 2 === 1) {
-         bigOnes[i] = bigOnes[i-1]+1
+          bigOnes[i] = bigOnes[i-1]+1
       } else {
         bigOnes[i] = i-1 === -1 ? 0 : bigOnes[i-1]+3
       }
-      
     }
-    bigOnes.map(x => x-1)
-    return bigOnes.includes(x)        
+      bigOnes.map(x => x-1)
+      return bigOnes.includes(x)
   }
 
     const CategoryCont = styled.div`
-        background: url(${props => props.img});
-        background-size: cover;
-        font-family: 'Oswald', sans-serif;
-        text-transform: uppercase;
-        margin: 7px 0;
-        letter-spacing: 1px;
-        color: white;
-        display: flex;
-        font-weight: bold;
-        align-items: center;
-        justify-content: center;
-        height: ${props => makeBig(props.num) || props.num === 0 ? 12 : 8}em;
-        width: 8em;
-        background-color: #59c584;
-        border-radius: 10px;
-        position: relative;
-        top :${props =>  props.num >= 4 ? -64*(Math.floor(props.num/4)) : 0}px;
+      background: url(${props => props.img});
+      background-size: cover;
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      margin: 7px 0;
+      letter-spacing: 1px;
+      color: white;
+      display: flex;
+      font-weight: bold;
+      align-items: center;
+      justify-content: center;
+      height: ${props => makeBig(props.num) || props.num === 0 ? 12 : 8}em;
+      width: 8em;
+      background-color: #59c584;
+      border-radius: 10px;
+      position: relative;
+      top :${props =>  props.num >= 4 ? -64*(Math.floor(props.num/4)) : 0}px;
     `;
-    
-   
-    
-      
+
       const handleClick = () => {
         setshowForm(true)
       }
@@ -90,38 +80,27 @@ const Categories = () => {
         const img = (await axios.get(ulr2)).data.results[0].urls.thumb;
         console.log(user.id, 'category user')
         postCategory({name,img})
-        
-        
     }
-    console.log(user.id, 'category user')
-    
+
     const postCategory = async category => {
       try {
         console.log(user.id, 'category user')
           const response = await axios.post(`http://localhost:3001/api/v1/users/${user.id}/categorys`,
           category,
           {withCredentials: true});
-          
-          console.log(response.data, 'categproes')
-          setCategories([...categories,response.data])
-            
-            
-          
+          dispatch({
+            type: "ADD_CONTACT",
+            payload: [response.data]
+          });
       } catch (err) {
-          // Handle Error Here
           console.error(err);
       }
-    
     }
 
-    
-
     const PopForm = () => {
-       
-       const [category, setCategory] = useState('')
-      
+      const [category, setCategory] = useState('')
+
       const handleChange = e => {
-        console.log(e, 'target', category)
         setCategory(e.target.value);
       }
       const onEnterPress = e => {
@@ -129,25 +108,24 @@ const Categories = () => {
         handleClickForm(category)
         setshowForm(false)
       }
-      
-    return (
-      <div className="Form" >
-        <div className="Form-cover" onClick={() => setshowForm(false)}>
-        </div>
-        <form onSubmit={onEnterPress}>
-          <h1>Add another category</h1>
-          <input type="text" id="category-name" name="name" onChange={handleChange}/>
-        </form>
-    </div>
-    )};
+      return (
+        <div className="Form" >
+          <div className="Form-cover" onClick={() => setshowForm(false)}>
+          </div>
+          <form onSubmit={onEnterPress}>
+            <h1>Add another category</h1>
+            <input type="text" id="category-name" name="name" onChange={handleChange}/>
+          </form>
+      </div>
+      )
+    };
 
-    console.log(categories, 'asd')
     return (
       <>
         <h2>Your categories</h2>
         <div className="categories">
           <div className="categories-container">
-              {categories.map((category, i) =>(
+              {state.categories.map((category, i) =>(
                 <Link to={`/category/${category.name}`}>
                   <CategoryCont img={category.img} num={i+1}>
                     <Paragraph>{category.name}</Paragraph>
