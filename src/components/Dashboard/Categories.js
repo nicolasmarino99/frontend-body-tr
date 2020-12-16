@@ -9,6 +9,7 @@ import { Redirect, useHistory, useRouteMatch } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Paragraph } from './StyledComponents/Components';
 import { UserContext } from './ContextProviders/UserStore';
+import PopForm from './PopForm';
 
 const Categories = () => {
 
@@ -99,6 +100,8 @@ console.log(state.categories, 'sds')
       }
     }
 
+
+/*
     const PopForm = () => {
       const [category, setCategory] = useState('')
 
@@ -121,7 +124,7 @@ console.log(state.categories, 'sds')
       </div>
       )
     };
-
+*/
     return (
       <>
         <h2>Your categories</h2>
@@ -137,7 +140,7 @@ console.log(state.categories, 'sds')
             </div>
         </div>
         <button className='add-category' onClick={handleClick}><AddIcon /></button>
-        {showForm ? <PopForm /> : ''}
+        {showForm ? <PopForm setshowForm={setshowForm} handleClickForm={handleClickForm}/> : ''}
       </>
     );
 }
