@@ -1,34 +1,33 @@
-import React, { createContext, useState } from 'react';
-import axios from 'axios';
+import React, { createContext, useReducer, useState } from 'react';
 
-const initialState = [
-    {name: 'Leading with the jab'}, 
-    {name: 'Right hook'}, 
-];
 
-const getPhoto = async (keyWord,i) => {
-        
-    try {
-      const clientIDKey = '5phIk2Z31V96pArCaFDbgnDH0rG6gJZ7NMaCr4R3CEg';
-      const ulr2 = `https://api.unsplash.com/search/photos/?client_id=${clientIDKey}&query=${keyWord}`;
-      initialState[i].img = (await axios.get(ulr2)).data.results[0].urls.thumb;
-    } catch (error) {
-      // eslint-disable-next-line no-alert
-      alert(error);
-    }
-    
-  };
-        
-    
+const initialState = {
+  items: [],
+};
 
-initialState.map((cat,i) => {(async () => await getPhoto(cat.name, i))()})
-console.log(initialState,'initialState')
+const reducer = (state, action) => {
+
+  switch (action.type) {
+    case "ADD_ITEM":
+      return {
+        items: [...state.items, ...action.payload]
+      };
+    case "DEL_ITEM":
+      return {
+        items: state.items.filter(
+          items => items.id !== action.payload
+        )
+      };
+    default:
+      throw new Error();
+  }
+};
 
 export const ItemsContext = createContext()
 
 const ItemsProvider = ({children}) => {
-    const [state, setstate] = useState(initialState)
-    return <ItemsContext.Provider value={[state, setstate]}>
+    const [state, dispatch] = useReducer(reducer,initialState)
+    return <ItemsContext.Provider value={[state, dispatch]}>
             {children}
             </ItemsContext.Provider>
 }

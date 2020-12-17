@@ -4,8 +4,8 @@ const initialState = {
     categories: [],
 };
 
-const reducer = (state = [{categories: []}], action) => {
-    console.log(state.categories)
+const reducer = (state, action) => {
+
     switch (action.type) {
       case "ADD_CATEGORY":
         return {
@@ -16,14 +16,6 @@ const reducer = (state = [{categories: []}], action) => {
          categories: state.categories.filter(
             category => category.id !== action.payload
           )
-        };
-      case "START":
-        return {
-          loading: true
-        };
-      case "COMPLETE":
-        return {
-          loading: false
         };
       default:
         throw new Error();
