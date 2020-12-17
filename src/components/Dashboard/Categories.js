@@ -6,12 +6,14 @@ import { CategoriesContext } from './ContextProviders/CategoriesProvider';
 import { Link } from 'react-router-dom';
 import { Paragraph, CategoryCont } from './StyledComponents/Components';
 import { getElements, postElement, deleteElement, getImage } from './apiCalls';
-import { UserContext } from './ContextProviders/UserStore';
+import { UserContext } from './ContextProviders/UserProvider';
 import SubmitForm from './SubmitForm';
+import { CategoryContext } from './ContextProviders/CategoryProvider';
 
 const Categories = () => {
 
   const [user, setUser] = useContext(UserContext);
+  const [category, setCategory] = useContext(CategoryContext);
   const [state, dispatch] = useContext(CategoriesContext);
   const [showForm, setshowForm] = useState(false);
 
@@ -30,6 +32,10 @@ const Categories = () => {
     postCategory({name, img}, "ADD_CATEGORY", categoriesUrl, dispatch)
   }
 
+  const handleClickDeleteButton = category => {
+    deleteCategories("DEL_CATEGORY",categoriesUrl+category.id, dispatch, category.id)
+  }
+  console.log(category)
     return (
       <>
         <h2>Your categories</h2>
@@ -37,11 +43,11 @@ const Categories = () => {
           <div className="categories-container">
               {state.categories ? state.categories.map((category, i) =>(
                 <div>
-                  <CategoryCont img={category.img} num={i+1}>
+                  <CategoryCont img={category.img} num={i+1} onMouseEnter={setCategory(category)}>
                     <Link to={`/category/${category.name}`}>
                       <Paragraph>{category.name}</Paragraph>
                     </Link>
-                    <button onClick={() => deleteCategories("DEL_CATEGORY",categoriesUrl+category.id, dispatch, category.id) }>
+                    <button onClick={() => handleClickDeleteButton(category) }>
                       <ClearIcon />
                     </button>
                   </CategoryCont>

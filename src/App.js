@@ -7,7 +7,7 @@ import Signup from './components/Signup';
 import Logout from './components/Logout';
 import Home from './components/Home';
 import Dashboard from './components/Dashboard/Dashboard';
-import { UserContext } from './components/Dashboard/ContextProviders/UserStore';
+import { UserContext } from './components/Dashboard/ContextProviders/UserProvider';
 
 import Category from './components/Dashboard/Category';
 import ItemsStore from './components/Dashboard/ContextProviders/ItemsProvider';

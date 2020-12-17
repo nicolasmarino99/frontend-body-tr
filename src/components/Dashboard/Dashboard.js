@@ -1,9 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Navbar, NavDropdown,Nav } from 'react-bootstrap';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-//import MainFrame from "./main-frame";
 import SideNav from "./Sidenav";
 import Navbars from "./Navbars";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
@@ -14,10 +10,9 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import './Dashboard.scss'
-import { Link } from 'react-router-dom';
 import ProgressCircle from './ProgressCircle';
 import Categories from './Categories';
-import { UserContext } from './ContextProviders/UserStore';
+import { UserContext } from './ContextProviders/UserProvider';
 
 
 const Dashboard = () => {
