@@ -11,10 +11,10 @@ const reducer = (state = [{categories: []}], action) => {
         return {
           categories: [...state.categories, ...action.payload]
         };
-      case "DEL_CONTACT":
+      case "DEL_CATEGORY":
         return {
-         categories: state.contacts.filter(
-            contact => contact.id !== action.payload
+         categories: state.categories.filter(
+            category => category.id !== action.payload
           )
         };
       case "START":

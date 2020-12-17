@@ -23,6 +23,7 @@ const getCategories = async (type, url, dispatch) => {
         url,
         {withCredentials: true}
       );
+
       dispatch({
         type,
         payload: response.data

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import AddIcon from '@material-ui/icons/Add';
-import styled, { keyframes } from 'styled-components';
+import ClearIcon from '@material-ui/icons/Clear';
 import axios from 'axios';
 import './Categories.scss';
 import './PopForm.scss';
@@ -20,9 +20,8 @@ const Categories = () => {
   const [showForm, setshowForm] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
 
-  const categoriesUrl = `http://localhost:3001/api/v1/users/${user.id}/categorys`
-  const categoryIDUrl = `http://localhost:3001/api/v1/users/${user.id}/categorys/${category.id}`
-  
+  const categoriesUrl = `http://localhost:3001/api/v1/users/${user.id}/categorys/`
+
   useEffect(() => {
     getCategories("ADD_CATEGORY", categoriesUrl, dispatch)
   }, []);
@@ -32,8 +31,8 @@ const Categories = () => {
   }
 
   const handleClickForm = async name => {
-    let category = {name, getImage(name)}
-    postCategory(category, "ADD_CATEGORY", categoriesUrl, dispatch)
+    let img = (await getImage(name));
+    postCategory({name, img}, "ADD_CATEGORY", categoriesUrl, dispatch)
   }
 
     return (
@@ -42,12 +41,17 @@ const Categories = () => {
         <div className="categories">
           <div className="categories-container">
               {state.categories ? state.categories.map((category, i) =>(
+                <div>
+                 <button onClick={() => deleteCategories("DEL_CATEGORY",categoriesUrl+category.id, dispatch, category.id)}>
+                  <ClearIcon />
+                </button>
                 <Link to={`/category/${category.name}`}>
-                  <button onClick={deleteCategories("DEL_CATEGORY",categoryIDUrl, dispatch, category.id)}><ClearIcon /></button>
+                
                   <CategoryCont img={category.img} num={i+1}>
                     <Paragraph>{category.name}</Paragraph>
                   </CategoryCont>
                 </Link>
+                </div>
               )) : ''}
             </div>
         </div>
