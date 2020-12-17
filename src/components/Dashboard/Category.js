@@ -6,11 +6,10 @@ import AddIcon from '@material-ui/icons/Add';
 import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-//import './PopForm.scss'; 
 import './Category.scss';
 import { Paragraph } from './StyledComponents/Components';
 import ClearIcon from '@material-ui/icons/Clear';
-import { UserContext } from './ContextProviders/UserStore';
+import { UserContext } from './ContextProviders/UserProvider';
 
 
 const Category = () => {

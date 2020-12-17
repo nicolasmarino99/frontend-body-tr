@@ -10,7 +10,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import { UserContext } from './components/Dashboard/ContextProviders/UserProvider';
 
 import Category from './components/Dashboard/Category';
-import ItemsStore from './components/Dashboard/ContextProviders/ItemsProvider';
+import ItemsProvider from './components/Dashboard/ContextProviders/ItemsProvider';
 import Item from './components/Dashboard/Item';
 
 

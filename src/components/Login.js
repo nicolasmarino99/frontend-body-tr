@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios'
 import {Link, useHistory} from 'react-router-dom'
 import { Form,Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Login.scss';
 import './ocean.scss';
-import { UserContext } from './Dashboard/ContextProviders/UserStore';
-import { useContext } from 'react';
+import { UserProvider } from './Dashboard/ContextProviders/UserProvider';
+
 
 const Login = props => {
   const [credentials, setCredentials] = useState({ 

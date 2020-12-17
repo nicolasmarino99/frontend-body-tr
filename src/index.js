@@ -3,19 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import CategoriesStore from './components/Dashboard/ContextProviders/CategoriesProvider';
-import ItemsStore from './components/Dashboard/ContextProviders/ItemsProvider';
-import UserStore from './components/Dashboard/ContextProviders/UserStore';
+import CategoriesProvider from './components/Dashboard/ContextProviders/CategoriesProvider';
+import ItemsProvider from './components/Dashboard/ContextProviders/ItemsProvider';
+import UserProvider from './components/Dashboard/ContextProviders/UserProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <UserStore>
-    <CategoriesStore>
-    <ItemsStore>
-      <App />
-    </ItemsStore>
-    </CategoriesStore>
-    </UserStore>
+    <UserProvider>
+      <CategoriesProvider>
+        <ItemsProvider>
+          <App />
+        </ItemsProvider>
+      </CategoriesProvider>
+    </UserProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

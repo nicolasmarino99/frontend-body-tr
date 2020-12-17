@@ -15,7 +15,7 @@ const Logout = ({handleLogout}) => {
             const response = await axios.post('http://localhost:3001/api/v1/logout', 
             {withCredentials: true});
             if (response.data.logged_in) {
-              
+              //document.cookie = 
               history.push('/')
               console.log(response)   
             } 
