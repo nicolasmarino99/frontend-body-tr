@@ -1,14 +1,15 @@
 import React, {useState} from 'react';
+import './SubmitForm.scss';
 
-const PopForm = ({handleClickSubmitForm, setshowForm}) => {
-    const [category, setCategory] = useState('')
+const SubmitForm = ({handleClickSubmitForm, setshowForm}) => {
+    const [element, setElement] = useState('')
 
     const handleChange = e => {
-      setCategory(e.target.value);
+      setElement(e.target.value);
     }
     const onEnterPress = e => {
       e.preventDefault();
-      handleClickSubmitForm(category)
+      handleClickSubmitForm(element)
       setshowForm(false)
     }
     return (
@@ -23,4 +24,4 @@ const PopForm = ({handleClickSubmitForm, setshowForm}) => {
     )
   };
 
-export default PopForm;
+export default SubmitForm;

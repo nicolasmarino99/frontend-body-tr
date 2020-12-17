@@ -1,11 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 
-const postCategory = async (category, type, url, dispatch) => {
+const postElement = async (element, type, url, dispatch) => {
     try {
         const response = await axios.post(
             url,
-            category,
+            element,
             {withCredentials: true}
         );
         dispatch({
@@ -17,7 +17,7 @@ const postCategory = async (category, type, url, dispatch) => {
     }
 }
 
-const getCategories = async (type, url, dispatch) => {
+const getElements = async (type, url, dispatch) => {
     try {
       const response = await axios.get(
         url,
@@ -34,7 +34,7 @@ const getCategories = async (type, url, dispatch) => {
     }
   };
 
-  const deleteCategories = async (type, url, dispatch, id) => {
+  const deleteElement = async (type, url, dispatch, id) => {
     try {
       const response = await axios.delete(
         url,
@@ -56,4 +56,4 @@ const getCategories = async (type, url, dispatch) => {
     const img = (await axios.get(ulr2)).data.results[0].urls.thumb;
     return img
   }
-export {postCategory, getCategories, deleteCategories, getImage};
+export {postElement, getElements, deleteElement, getImage};
