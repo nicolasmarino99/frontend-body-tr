@@ -8,7 +8,7 @@ import { CategoriesContext } from './ContextProviders/CategoriesProvider';
 import { Redirect, useHistory, useRouteMatch } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Paragraph, CategoryCont } from './StyledComponents/Components';
-import { getCategories, postCategory } from './apiCalls';
+import { getCategories, postCategory, deleteCategories, getImage } from './apiCalls';
 import { UserContext } from './ContextProviders/UserStore';
 import PopForm from './PopForm';
 
@@ -16,11 +16,15 @@ const Categories = () => {
 
   const {path,url} = useRouteMatch();
   const [user, setUser] = useContext(UserContext);
-  const [showForm, setshowForm] = useState(false);
   const [state, dispatch] = useContext(CategoriesContext);
+  const [showForm, setshowForm] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
 
+  const categoriesUrl = `http://localhost:3001/api/v1/users/${user.id}/categorys`
+  const categoryIDUrl = `http://localhost:3001/api/v1/users/${user.id}/categorys/${category.id}`
+  
   useEffect(() => {
-    getCategories("ADD_CATEGORY", `http://localhost:3001/api/v1/users/${user.id}/categorys`, dispatch)
+    getCategories("ADD_CATEGORY", categoriesUrl, dispatch)
   }, []);
 
   const handleClick = () => {
@@ -28,10 +32,8 @@ const Categories = () => {
   }
 
   const handleClickForm = async name => {
-    const clientIDKey = '5phIk2Z31V96pArCaFDbgnDH0rG6gJZ7NMaCr4R3CEg';
-    const ulr2 = `https://api.unsplash.com/search/photos/?client_id=${clientIDKey}&query=${name}`;
-    const img = (await axios.get(ulr2)).data.results[0].urls.thumb;
-    postCategory({name,img}, "ADD_CATEGORY", `http://localhost:3001/api/v1/users/${user.id}/categorys`, dispatch)
+    let category = {name, getImage(name)}
+    postCategory(category, "ADD_CATEGORY", categoriesUrl, dispatch)
   }
 
     return (
@@ -41,6 +43,7 @@ const Categories = () => {
           <div className="categories-container">
               {state.categories ? state.categories.map((category, i) =>(
                 <Link to={`/category/${category.name}`}>
+                  <button onClick={deleteCategories("DEL_CATEGORY",categoryIDUrl, dispatch, category.id)}><ClearIcon /></button>
                   <CategoryCont img={category.img} num={i+1}>
                     <Paragraph>{category.name}</Paragraph>
                   </CategoryCont>
