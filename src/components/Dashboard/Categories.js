@@ -11,6 +11,7 @@ import { Paragraph, CategoryCont } from './StyledComponents/Components';
 import { getCategories, postCategory, deleteCategories, getImage } from './apiCalls';
 import { UserContext } from './ContextProviders/UserStore';
 import PopForm from './PopForm';
+import DecideForm from './DecideForm';
 
 const Categories = () => {
 
@@ -18,6 +19,7 @@ const Categories = () => {
   const [user, setUser] = useContext(UserContext);
   const [state, dispatch] = useContext(CategoriesContext);
   const [showForm, setshowForm] = useState(false);
+  const [showDecideForm, setShowDecideForm] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
 
   const categoriesUrl = `http://localhost:3001/api/v1/users/${user.id}/categorys/`
@@ -26,13 +28,15 @@ const Categories = () => {
     getCategories("ADD_CATEGORY", categoriesUrl, dispatch)
   }, []);
 
-  const handleClick = () => {
-    setshowForm(true)
-  }
-
-  const handleClickForm = async name => {
+  
+  const handleClickSubmitForm = async name => {
     let img = (await getImage(name));
     postCategory({name, img}, "ADD_CATEGORY", categoriesUrl, dispatch)
+  }
+
+  const handleClickDecideForm = () => {
+    setShowDecideForm(true)
+    deleteCategories("DEL_CATEGORY",categoriesUrl+category.id, dispatch, category.id)
   }
 
     return (
@@ -42,21 +46,21 @@ const Categories = () => {
           <div className="categories-container">
               {state.categories ? state.categories.map((category, i) =>(
                 <div>
-                 <button onClick={() => deleteCategories("DEL_CATEGORY",categoriesUrl+category.id, dispatch, category.id)}>
-                  <ClearIcon />
-                </button>
                 <Link to={`/category/${category.name}`}>
-                
                   <CategoryCont img={category.img} num={i+1}>
                     <Paragraph>{category.name}</Paragraph>
+                    <button onClick={() => setShowDecideForm(true) }>
+                  <ClearIcon />
+                </button>
                   </CategoryCont>
                 </Link>
                 </div>
               )) : ''}
             </div>
         </div>
-        <button className='add-category' onClick={handleClick}><AddIcon /></button>
-        {showForm ? <PopForm setshowForm={setshowForm} handleClickForm={handleClickForm}/> : ''}
+        <button className='add-category' onClick={ () => setshowForm(true) }><AddIcon /></button>
+        {showForm ? <PopForm setshowForm={setshowForm} handleClickSubmitForm={handleClickSubmitForm}/> : ''}
+        {showDecideForm ? <DecideForm setShowDecideForm={setShowDecideForm} handleClickDecideForm={handleClickDecideForm}/> : ''}
       </>
     );
 }

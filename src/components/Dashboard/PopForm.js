@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const PopForm = ({handleClickForm, setshowForm}) => {
+const PopForm = ({handleClickSubmitForm, setshowForm}) => {
     const [category, setCategory] = useState('')
 
     const handleChange = e => {
@@ -8,7 +8,7 @@ const PopForm = ({handleClickForm, setshowForm}) => {
     }
     const onEnterPress = e => {
       e.preventDefault();
-      handleClickForm(category)
+      handleClickSubmitForm(category)
       setshowForm(false)
     }
     return (

@@ -22,7 +22,16 @@ html, body {
             display: flex;
             justify-content: center;
             align-items: center;
-
+        }
+        button {
+            position: absolute;
+            background-color: chartreuse;
+            top: 0;
+            right: 0;
+            z-index: 5;
+            background: none;
+            border: none;
+            color: white;
         }
     }
 }
