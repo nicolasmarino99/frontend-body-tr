@@ -11,7 +11,7 @@ import Switch from '@material-ui/core/Switch';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import ReactStopwatch from 'react-stopwatch';
-import Stopwatch from '../Stopwatch';
+import Stopwatch from './Stopwatch';
 
 const Item = () => {
     //const [categories, setCategories] = useContext(CategoriesContext)

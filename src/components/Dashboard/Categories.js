@@ -21,7 +21,7 @@ const Categories = () => {
 
   const getCategories = getElements
   const postCategory = postElement
-  const deleteCategories = deleteElement
+  const deleteCategory = deleteElement
 
   useEffect(() => {
     getCategories("ADD_CATEGORY", categoriesUrl, dispatch)
@@ -33,17 +33,16 @@ const Categories = () => {
   }
 
   const handleClickDeleteButton = category => {
-    deleteCategories("DEL_CATEGORY",categoriesUrl+category.id, dispatch, category.id)
+    deleteCategory("DEL_CATEGORY",categoriesUrl+category.id, dispatch, category.id)
   }
-  console.log(category)
     return (
       <>
         <h2>Your categories</h2>
         <div className="categories">
           <div className="categories-container">
               {state.categories ? state.categories.map((category, i) =>(
-                <div>
-                  <CategoryCont img={category.img} num={i+1} onMouseEnter={setCategory(category)}>
+                <div onMouseEnter={() => (setCategory(category))}>
+                  <CategoryCont img={category.img} num={i+1} >
                     <Link to={`/category/${category.name}`}>
                       <Paragraph>{category.name}</Paragraph>
                     </Link>

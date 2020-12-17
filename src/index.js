@@ -6,14 +6,17 @@ import * as serviceWorker from './serviceWorker';
 import CategoriesProvider from './components/Dashboard/ContextProviders/CategoriesProvider';
 import ItemsProvider from './components/Dashboard/ContextProviders/ItemsProvider';
 import UserProvider from './components/Dashboard/ContextProviders/UserProvider';
+import CategoryProvider from './components/Dashboard/ContextProviders/CategoryProvider';
 
 ReactDOM.render(
   <React.StrictMode>
     <UserProvider>
       <CategoriesProvider>
-        <ItemsProvider>
-          <App />
-        </ItemsProvider>
+        <CategoryProvider>
+          <ItemsProvider>
+            <App />
+          </ItemsProvider>
+        </CategoryProvider>
       </CategoriesProvider>
     </UserProvider>
   </React.StrictMode>,

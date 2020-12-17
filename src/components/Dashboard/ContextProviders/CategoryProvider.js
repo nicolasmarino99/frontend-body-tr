@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react';
 
-export const CategoryContext = createContext({});
+export const CategoryContext = createContext();
 
 const CategoryProvider = ({children}) => {
     const [state, setstate] = useState({})
