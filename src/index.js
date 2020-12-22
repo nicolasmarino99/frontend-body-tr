@@ -7,6 +7,7 @@ import CategoriesProvider from './components/Dashboard/ContextProviders/Categori
 import ItemsProvider from './components/Dashboard/ContextProviders/ItemsProvider';
 import UserProvider from './components/Dashboard/ContextProviders/UserProvider';
 import CategoryProvider from './components/Dashboard/ContextProviders/CategoryProvider';
+import ItemProvider from './components/Dashboard/ContextProviders/ItemProvide';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,7 +15,9 @@ ReactDOM.render(
       <CategoriesProvider>
         <CategoryProvider>
           <ItemsProvider>
-            <App />
+            <ItemProvider>
+             <App />
+            </ItemProvider>
           </ItemsProvider>
         </CategoryProvider>
       </CategoriesProvider>
