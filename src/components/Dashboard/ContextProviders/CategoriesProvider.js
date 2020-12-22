@@ -9,12 +9,10 @@ const reducer = (state, action) => {
     switch (action.type) {
       case "SHOW_CATEGORIES":
         let categories = [...state.categories, ...action.payload];
-        const deleteDuplicate = Array.from(new Set(categories.map(a => a.id)))
-            .map(id => {
-              return categories.find(a => a.id === id)
-            })
+        categories = Array.from(new Set(categories.map(a => a.id)))
+            .map(id =>  categories.find(a => a.id === id))
         return {
-          categories: [...deleteDuplicate]
+          categories: [...categories]
         };
       case "ADD_CATEGORY":
         return {

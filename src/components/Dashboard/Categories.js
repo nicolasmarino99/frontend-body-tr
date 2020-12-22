@@ -18,14 +18,13 @@ const Categories = () => {
   const [showForm, setshowForm] = useState(false);
 
   const categoriesUrl = `http://localhost:3001/api/v1/users/${user.id}/categories/`
-  //console.log(user, categoriesUrl)
+
   const getCategories = getElements
   const postCategory = postElement
-  const deleteCategory = deleteElement  
+  const deleteCategory = deleteElement
 
-  useEffect(() => { 
+  useEffect(() => {
     getCategories("SHOW_CATEGORIES", categoriesUrl, dispatch)
-
   }, []);
 
   const handleClickSubmitForm = async name => {

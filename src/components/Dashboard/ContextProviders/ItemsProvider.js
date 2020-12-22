@@ -10,16 +10,13 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "SHOW_ITEMS":
     let items = [...state.items, ...action.payload];
-    const deleteDuplicate = Array.from(new Set(items.map(a => a.id)))
-        .map(id => {
-          return items.find(a => a.id === id)
-        })
+    items = Array.from(new Set(items.map(a => a.id)))
+        .map(id =>  items.find(a => a.id === id))
     return {
-      items: [...deleteDuplicate]
+      items: [...items]
     };
 
     case "ADD_ITEM":
-      console.log(state, 'items')
       return {
         items: [...state.items, ...action.payload]
       };

@@ -12,32 +12,16 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import ReactStopwatch from 'react-stopwatch';
 import Stopwatch from './Stopwatch';
+import { ItemContext } from './ContextProviders/ItemProvide';
 
 const Item = () => {
-    //const [categories, setCategories] = useContext(CategoriesContext)
-    const [items, setItems] = useContext(ItemsContext)
+    const [item, setItem] = useContext(ItemContext)
     const [checked, setChecked] = useState(false);
+
     const toggleChecked = () => {
         setChecked((prev) => !prev);
       };
-    const chopUrl = str => {
-        let vas = 0
-        let i = 0
-        str.split('')
-        while (vas !== 3) {
-         if (str[i] === '/') vas += 1 
-         if (vas == 3) return str.slice(i+1, str.length)
-         i++
-        }
-      }
-    let item
-    const {url} = useRouteMatch()
-    const cleanUrl = chopUrl(url);
-    item = items.filter(x => x.name === cleanUrl)[0]
-    console.log(cleanUrl,'url') 
-    //console.log(category)
 
-    
     return (
 
         <div className="Item">

@@ -9,10 +9,12 @@ import { UserContext } from './ContextProviders/UserProvider';
 import SubmitForm from './SubmitForm';
 import { CategoryContext } from './ContextProviders/CategoryProvider';
 import './Category.scss'
+import { ItemContext } from './ContextProviders/ItemProvide';
 
 
 const Category = () => {
   const [category, setCategory] = useContext(CategoryContext)
+  const [item, setItem] = useContext(ItemContext)
   const [ItemState, dispatch] = useContext(ItemsContext)
   const [showForm, setshowForm] = useState(false)
   const [user, setUser] = useContext(UserContext);
@@ -65,7 +67,7 @@ const Category = () => {
             </div>
               <div className="items">
               {ItemState.items ? ItemState.items.map((item, i) =>(
-                  <ItemCont img={item.img} num={i}>
+                  <ItemCont img={item.img} num={i} onClick={() => (setItem(item))}>
                     <Link to={`/category/${category.name}/${item.name}`}>
                       <Paragraph>
                       <p className="time">8 minutes</p>
