@@ -36,15 +36,31 @@ const makeBig = x => {
 
 const Paragraph = styled.p`
 background: #00000063;
-width: 100%;
 height: 100%;
 display: flex;
 justify-content: center;
 align-items: center;
-margin-top: 15px;
 border-radius: 6%;
 display: flex;
 flex-direction: column-reverse;
+color: white;
 `;
-
-export {Paragraph, CategoryCont}
+const ItemCont = styled.div`
+    background: url(${props => props.img});
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background-size: cover;
+    margin: 1em ;
+    color: white;
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    height: 9em;
+    width: 80%;
+    background-color: #59c584;
+    border-radius: 10px;
+    margin: 1em auto;
+  `;
+export {Paragraph, CategoryCont, ItemCont}

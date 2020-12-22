@@ -17,14 +17,15 @@ const Categories = () => {
   const [state, dispatch] = useContext(CategoriesContext);
   const [showForm, setshowForm] = useState(false);
 
-  const categoriesUrl = `http://localhost:3001/api/v1/users/${user.id}/categorys/`
-
+  const categoriesUrl = `http://localhost:3001/api/v1/users/${user.id}/categories/`
+  //console.log(user, categoriesUrl)
   const getCategories = getElements
   const postCategory = postElement
-  const deleteCategory = deleteElement
+  const deleteCategory = deleteElement  
 
-  useEffect(() => {
-    getCategories("ADD_CATEGORY", categoriesUrl, dispatch)
+  useEffect(() => { 
+    getCategories("SHOW_CATEGORIES", categoriesUrl, dispatch)
+
   }, []);
 
   const handleClickSubmitForm = async name => {
@@ -35,13 +36,14 @@ const Categories = () => {
   const handleClickDeleteButton = category => {
     deleteCategory("DEL_CATEGORY",categoriesUrl+category.id, dispatch, category.id)
   }
+  console.log(category, state.categories)
     return (
       <>
         <h2>Your categories</h2>
         <div className="categories">
           <div className="categories-container">
               {state.categories ? state.categories.map((category, i) =>(
-                <div onMouseEnter={() => (setCategory(category))}>
+                <div onClick={() => (setCategory(category))}>
                   <CategoryCont img={category.img} num={i+1} >
                     <Link to={`/category/${category.name}`}>
                       <Paragraph>{category.name}</Paragraph>

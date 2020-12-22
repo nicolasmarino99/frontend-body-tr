@@ -12,9 +12,7 @@ const Signup = props => {
         email: '',
         password: '',
         password_confirmation: '',
-        weight: '', 
-        height: '',
-        errors: ''
+        errors: []
      }) 
      const {name, email, password, password_confirmation, weight, height} = credentials
   
@@ -27,16 +25,14 @@ const Signup = props => {
     
       const handleSubmit = event => {
           event.preventDefault()
-          const {name, email, password, password_confirmation, weight, height} = credentials
+          const {name, email, password, password_confirmation} = credentials
           let user = {
             name: name,
             email: email,
             password: password,
             password_confirmation: password_confirmation,
-            weight: weight,
-            height: height,
           }
-          console.log(credentials)
+         
           sendPostRequest(user)
           
            history.push('/')
@@ -47,6 +43,7 @@ const Signup = props => {
                 {user}, 
                 {withCredentials: true});
                 if (response.data.status === 'created') {
+                  console.log(response.data)
                   props.handleLogin(response.data)
                   
                   
@@ -82,13 +79,13 @@ const Signup = props => {
       <Form onSubmit={handleSubmit}>
       <Row>
           <Col>
-          <Form.Group controlId="formBasicEmail" >
+          <Form.Group controlId="formBasicUsername" >
             <Form.Label>Username</Form.Label>
             <Form.Control 
             placeholder="name"
             type="text"
             name="name"
-            value={name}
+            
             onChange={handleChange}
             />
             
@@ -102,7 +99,7 @@ const Signup = props => {
             placeholder="email"
             type="text"
             name="email"
-            value={email}
+           
             onChange={handleChange}
             />
             
@@ -119,7 +116,7 @@ const Signup = props => {
               placeholder="password"
               type="password"
               name="password"
-              value={password}
+            
               onChange={handleChange}
             />
             
@@ -128,53 +125,32 @@ const Signup = props => {
           </Row>
           <Row>
           <Col>
-          <Form.Group controlId="formBasicPassword">
+          <Form.Group controlId="formBasicPasswordconfirmation">
             <Form.Label>Password confirmation</Form.Label>
             <Form.Control 
               placeholder="Password confirmation"
               type="password"
               name="Password confirmation"
-              value={password_confirmation}
+              
               onChange={handleChange}
             />
           </Form.Group>
           </Col>
           </Row>
-          <Row>
-          <Col>
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Height</Form.Label>
-            <Form.Control 
-              placeholder="height"  
-              type="number"
-              name="height"
-              value={height}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          </Col>
-          <Col>
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Weight</Form.Label>
-            <Form.Control 
-              placeholder="height"  
-              type="number"
-              name="Weight"
-              value={weight}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          </Col>
-          </Row>
+          
           <Button variant="primary" type="submit">
           Signup
           </Button>
           
         </Form>
-    
+        
   
       </div>
-
+      <div>
+              <ul>
+                {credentials.errors.map(error => <li key={error}>{error}</li>)}
+              </ul>
+            </div>
       <div className="ocean">
         <div className="wave"></div> 
         <div className="wave"></div>

@@ -6,6 +6,7 @@ const SubmitForm = ({handleClickSubmitForm, setshowForm}) => {
 
     const handleChange = e => {
       setElement(e.target.value);
+      console.log(e.target.value)
     }
     const onEnterPress = e => {
       e.preventDefault();

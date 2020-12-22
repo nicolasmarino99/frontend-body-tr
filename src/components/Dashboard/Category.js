@@ -1,94 +1,40 @@
-import React, { useContext, useState } from 'react';
-import { useRouteMatch } from 'react-router';
-import { CategoriesContext } from './ContextProviders/CategoriesProvider';
+import React, { useContext, useState, useEffect } from 'react';
 import { ItemsContext } from './ContextProviders/ItemsProvider';
 import AddIcon from '@material-ui/icons/Add';
-import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-import './Category.scss';
-import { Paragraph } from './StyledComponents/Components';
+import { ItemCont, Paragraph } from './StyledComponents/Components';
 import ClearIcon from '@material-ui/icons/Clear';
+import { getElements, postElement, deleteElement, getImage } from './apiCalls';
 import { UserContext } from './ContextProviders/UserProvider';
+import SubmitForm from './SubmitForm';
+import { CategoryContext } from './ContextProviders/CategoryProvider';
+import './Category.scss'
 
 
 const Category = () => {
-
-  const [categories, setCategories] = useContext(CategoriesContext)
-  const [items, setItems] = useContext(ItemsContext)
+  const [category, setCategory] = useContext(CategoryContext)
+  const [ItemState, dispatch] = useContext(ItemsContext)
   const [showForm, setshowForm] = useState(false)
   const [user, setUser] = useContext(UserContext);
 
-  let category
-  const {url} = useRouteMatch()
-  const cleanUrl = url.replace(/category/g, "").replace(/\//g, "");
-  category = categories.filter(x => x.name === cleanUrl)[0]
+  const itemsUrl = `http://localhost:3001/api/v1/users/${user.id}/categories/${category.id}/tasks/`
 
-  const ItemCont = styled.div`
-    background: url(${props => props.img});
-    font-family: 'Oswald', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    background-size: cover;
-    margin: 1em ;
-    color: white;
-    display: flex;
-    font-weight: bold;
-    align-items: center;
-    justify-content: center;
-    height: 9em;
-    width: 80%;
-    background-color: #59c584;
-    border-radius: 10px;
-    margin: 1em auto;
-  `;
+  const getItems = getElements
+  const postItem = postElement
+  const deleteItem = deleteElement
 
-  const handleClick = () => {
-    setshowForm(true)
-  }
-  const handleClickForm = async name => {
-    const clientIDKey = '5phIk2Z31V96pArCaFDbgnDH0rG6gJZ7NMaCr4R3CEg';
-    const ulr2 = `https://api.unsplash.com/search/photos/?client_id=${clientIDKey}&query=${name}`;
-    const img = (await axios.get(ulr2)).data.results[0].urls.thumb;
-    setItems([...items,{name, img}])
+  useEffect(() => {
+    getItems("SHOW_ITEMS", itemsUrl, dispatch)
+  }, []);
+
+  const handleClickSubmitForm = async name => {
+    let img = (await getImage(name));
+    postItem({name, img}, "ADD_ITEM", itemsUrl, dispatch)
   }
 
-
-  const postItem = async category => {
-    try {
-      console.log(user.id, 'category user')
-        const response = await axios.post(`http://localhost:3001/api/v1/users/${user.id}/categorys`,
-        category,
-        {withCredentials: true});
-        setCategories([...categories,response.data])
-    } catch (err) {
-        console.error(err);
-    }
+  const handleClickDeleteButton = item => {
+    deleteItem("DEL_ITEM",itemsUrl+item.id, dispatch, item.id)
   }
-
-    const PopForm = () => {
-      const [category, setCategory] = useState('')
-      const handleChange = e => {
-        console.log(e, 'target', category)
-        setCategory(e.target.value);
-      }
-       const onEnterPress = e => {
-         e.preventDefault();
-         handleClickForm(category)
-         setshowForm(false)
-       }
-
-       return (
-       <div className="Form" >
-       <div className="Form-cover" style={{width: "100%"}} onClick={() => setshowForm(false)}>
-       </div>
-       <form onSubmit={onEnterPress}>
-         <h1>Add another category</h1>
-         <input type="text" id="category-name" name="name" onChange={handleChange}/>
-       </form>
-     </div>
-     )};
-
 
     return (
         <div className="Category">
@@ -118,21 +64,24 @@ const Category = () => {
                 <button>Leaderboard</button>
             </div>
               <div className="items">
-              {items.map((item, i) =>(
-                  <Link to={`/category/${category.name}/${item.name}`}>
-                      <ItemCont img={item.img} num={i}>
-                          <Paragraph>
-                          <p className="time">8 minutes</p>
-                            {item.name}
-                            <p className="difficulty-tag">easy</p>
-                          </Paragraph>
-                      </ItemCont>
-                  </Link>
-                  ))}
+              {ItemState.items ? ItemState.items.map((item, i) =>(
+                  <ItemCont img={item.img} num={i}>
+                    <Link to={`/category/${category.name}/${item.name}`}>
+                      <Paragraph>
+                      <p className="time">8 minutes</p>
+                        {item.name}
+                        <p className="difficulty-tag">easy</p>
+                      </Paragraph>
+                      </Link>
+                        <button className="deleteButton" onClick={() => handleClickDeleteButton(item) }>
+                          <ClearIcon />
+                        </button>
+                  </ItemCont>
+                  )) : '' }
               </div>
             </div>
-            <button className='add-category' onClick={handleClick}><AddIcon /></button>
-            {showForm ? <PopForm /> : ''}
+            <button className='add-category' onClick={() => setshowForm(true)}><AddIcon /></button>
+            {showForm ? <SubmitForm setshowForm={setshowForm} handleClickSubmitForm={handleClickSubmitForm}/> : ''}
         </div>
     );
 }
