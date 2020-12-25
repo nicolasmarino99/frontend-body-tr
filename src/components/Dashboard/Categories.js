@@ -25,17 +25,18 @@ const Categories = () => {
 
   useEffect(() => {
     getCategories("SHOW_CATEGORIES", categoriesUrl, dispatch)
+
   }, []);
 
   const handleClickSubmitForm = async name => {
-    let img = (await getImage(name));
-    postCategory({name, img}, "ADD_CATEGORY", categoriesUrl, dispatch)
+    let img = (await getImage(name.name));
+    postCategory({name: name.name, img}, "ADD_CATEGORY", categoriesUrl, dispatch)
   }
 
   const handleClickDeleteButton = category => {
     deleteCategory("DEL_CATEGORY",categoriesUrl+category.id, dispatch, category.id)
   }
-  console.log(category, state.categories)
+
     return (
       <>
         <h2>Your categories</h2>
@@ -56,7 +57,7 @@ const Categories = () => {
             </div>
         </div>
         <button className='add-category' onClick={ () => setshowForm(true) }><AddIcon /></button>
-        {showForm ? <SubmitForm setshowForm={setshowForm} handleClickSubmitForm={handleClickSubmitForm}/> : ''}
+        {showForm ? <SubmitForm setshowForm={setshowForm} handleClickSubmitForm={handleClickSubmitForm} name="category" object={{name: ''}}/> : ''}
       </>
     );
 }

@@ -30,8 +30,8 @@ const Category = () => {
   }, []);
 
   const handleClickSubmitForm = async name => {
-    let img = (await getImage(name));
-    postItem({name, img}, "ADD_ITEM", itemsUrl, dispatch)
+    let img = (await getImage(name.name));
+    postItem({name: name.name, img}, "ADD_ITEM", itemsUrl, dispatch)
   }
 
   const handleClickDeleteButton = item => {
@@ -83,7 +83,7 @@ const Category = () => {
               </div>
             </div>
             <button className='add-category' onClick={() => setshowForm(true)}><AddIcon /></button>
-            {showForm ? <SubmitForm setshowForm={setshowForm} handleClickSubmitForm={handleClickSubmitForm}/> : ''}
+            {showForm ? <SubmitForm setshowForm={setshowForm} handleClickSubmitForm={handleClickSubmitForm} name="item" object={{name: ''}}/> : ''}
         </div>
     );
 }

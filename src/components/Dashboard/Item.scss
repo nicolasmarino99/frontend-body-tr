@@ -1,4 +1,9 @@
 .Item {
+    .description {
+        width: 80%;
+        text-align: -webkit-left;
+        margin: 2em;
+    }
     .difficulty-tag {
         align-self: flex-end;
         padding: 0.5em;
@@ -66,11 +71,7 @@
 
                 }
             }
-            .description {
-                width: 80%;
-                text-align: -webkit-left;
-                margin: 2em;
-            }
+            
             .warm-up {
                 display: flex;
                 padding: 1em;

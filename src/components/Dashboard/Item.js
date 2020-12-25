@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router';
 import { CategoriesContext } from './ContextProviders/CategoriesProvider';
 import { ItemsContext } from './ContextProviders/ItemsProvider';
@@ -13,17 +13,86 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import ReactStopwatch from 'react-stopwatch';
 import Stopwatch from './Stopwatch';
 import { ItemContext } from './ContextProviders/ItemProvide';
+import { deleteElement, getElements, getImage, postElement } from './apiCalls';
+import { UserContext } from './ContextProviders/UserProvider';
+import { CategoryContext } from './ContextProviders/CategoryProvider';
+import { ProgressItemsContext } from './ContextProviders/ProgressItemsProvider';
+import { ItemCont } from './StyledComponents/Components';
+import SubmitForm from './SubmitForm';
 
 const Item = () => {
     const [item, setItem] = useContext(ItemContext)
-    const [checked, setChecked] = useState(false);
+    const [user, setUser] = useContext(UserContext);
+    const [category, setCategory] = useContext(CategoryContext);
+    const [showForm, setshowForm] = useState(false)
+    const [progressItem, setProgressItem] = useState({});
+   
+    const [state, dispatch] = useContext(ProgressItemsContext);
+    console.log(state.progressItems)
+    
 
-    const toggleChecked = () => {
+    const progresssItemsUrl = `http://localhost:3001/api/v1/users/${user.id}/categories/${category.id}/tasks/${item.id}/progress_items/`
+
+    const getProgresssItems = getElements
+    const postProgresssItems = postElement
+    const deleteProgresssItems = deleteElement
+
+    useEffect(() => {
+      getProgresssItems("SHOW_PROGRESS_ITEMS", progresssItemsUrl, dispatch)
+    }, []);
+
+    const handleClickSubmitForm = async info => {
+      postProgresssItems({name: info.name, description: info.description }, "ADD_PROGRESS_ITEMS", progresssItemsUrl, dispatch)
+    }
+
+    const handleClickDeleteButton = item => {
+      deleteProgresssItems("DEL_PROGRESS_ITEMS",progresssItemsUrl+progressItem.id, dispatch, progressItem.id)
+    }
+
+    const Exercise = ({exercise}) => {
+      const [checked, setChecked] = useState(false);
+      const toggleChecked = () => {
         setChecked((prev) => !prev);
       };
+      return (
+          <div className="warm-up">
+            <div className="title">
+                <h2>{exercise.name}</h2>
+                <p>Time: {exercise.name}</p>
+            </div>
+            <FormGroup>
+                <FormControlLabel
+                    control={<Switch checked={checked} onChange={toggleChecked} />}
+                />
+            </FormGroup>
+            {checked ? <Stopwatch time={exercise.time}/> : ''}
+        </div>
+      )
+    }
+
+    const Routine = ({item}) => {
+        const [checked, setChecked] = useState(false);
+
+        return (
+            
+            <div className="warm-up" onClick={() => setProgressItem(item)}>
+              <div className="description">
+                      {item.description}
+                  </div>
+              {item.progress.map(exercise => <Exercise exercise={exercise}/>)}
+                <button className="deleteButton" onClick={() => handleClickDeleteButton(item) }>
+                  <ClearIcon />
+                </button>
+                <button className='add-exercise' onClick={() => setshowForm(true)}>
+              <AddIcon />
+            </button>
+            </div>
+
+            
+        )
+    }
 
     return (
-
         <div className="Item">
           <div className="header">
             <img src={item.img}/>
@@ -33,24 +102,14 @@ const Item = () => {
           <div className="details">
                 <div className="social">
                 <button className="follow">LET'S START</button>
-                <div className="description">
-                    Learn how to break your opponent defence with your jab.
-                </div>
-                <div className="warm-up">
-                    <div className="title">
-                        <h2>Warm up</h2>
-                        <p>4 exercises(3 minutes)</p>
-                    </div>
-                    <FormGroup>
-                        <FormControlLabel
-                            control={<Switch checked={checked} onChange={toggleChecked} />}
-                        />
-                    </FormGroup>
-                </div>
            </div>
             </div>
-
-            {checked ? <Stopwatch /> : ''}
+            {state.progressItems ?
+              state.progressItems.map((item, i) =>(
+                 <Routine item={item} />))
+              : '' }
+              <button className='add-category' onClick={ () => setshowForm(true) }><AddIcon /></button>
+            {showForm ? <SubmitForm setshowForm={setshowForm} handleClickSubmitForm={handleClickSubmitForm} name="progressItems" object={{name: '', description: ''}}/> : ''}
         </div>
     );
 }

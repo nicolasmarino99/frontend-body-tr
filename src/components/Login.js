@@ -9,13 +9,12 @@ import { UserProvider } from './Dashboard/ContextProviders/UserProvider';
 
 
 const Login = props => {
-  const [credentials, setCredentials] = useState({ 
+  const [credentials, setCredentials] = useState({
     name: '',
     password: '',
     errors: ''
-   }) 
-   
-   
+   })
+
    const {name, password} = credentials
 
    const handleChange = event => {
@@ -32,10 +31,7 @@ const Login = props => {
           password: password
         }
         sendPostRequest(user)
-        
     };
-    
-    
 
     const sendPostRequest = async (user) => {
       try {
@@ -44,10 +40,7 @@ const Login = props => {
           {withCredentials: true});
           if (response.data.logged_in) {
             props.handleLogin(response.data)
-            console.log(response, 'response')
-           
             history.push('/')
-            
           } else {
             setCredentials({...credentials ,errors: response.data.errors})
           }
@@ -56,7 +49,7 @@ const Login = props => {
           console.error(err);
       }
     }
-      
+
       const handleErrors = () => (
           <div>
             <ul>

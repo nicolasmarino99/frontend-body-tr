@@ -8,6 +8,7 @@ const reducer = (state, action) => {
 
     switch (action.type) {
       case "SHOW_CATEGORIES":
+        state.categories = [];
         let categories = [...state.categories, ...action.payload];
         categories = Array.from(new Set(categories.map(a => a.id)))
             .map(id =>  categories.find(a => a.id === id))
