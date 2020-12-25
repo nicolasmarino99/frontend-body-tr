@@ -6,7 +6,7 @@ const initialProgressItemsState = {
 };
 
 const reducer = (state, action) => {
-
+  console.log(action, state)
   switch (action.type) {
     case "SHOW_PROGRESS_ITEMS":
       state.progressItems = []
@@ -17,6 +17,10 @@ const reducer = (state, action) => {
       return {
         progressItems: [...progressItems]
       };
+      case "ADD_PROGRESS_ITEMS":
+        return {
+          progressItems: [...state.progressItems, ...action.payload]
+        };  
 
     case "SHOW_EXERCISE_ITEM":
       return {

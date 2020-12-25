@@ -58,7 +58,7 @@ const Item = () => {
           <div className="warm-up">
             <div className="title">
                 <h2>{exercise.name}</h2>
-                <p>Time: {exercise.name}</p>
+                <p>Time: {exercise.time}</p>
             </div>
             <FormGroup>
                 <FormControlLabel
@@ -72,13 +72,13 @@ const Item = () => {
 
     const Routine = ({item}) => {
         const [checked, setChecked] = useState(false);
-
+        const [showForm, setshowForm] = useState(false)
         return (
-            
             <div className="warm-up" onClick={() => setProgressItem(item)}>
+              <h2>{item.name}</h2>
               <div className="description">
                       {item.description}
-                  </div>
+              </div>
               {item.progress.map(exercise => <Exercise exercise={exercise}/>)}
                 <button className="deleteButton" onClick={() => handleClickDeleteButton(item) }>
                   <ClearIcon />
@@ -86,6 +86,7 @@ const Item = () => {
                 <button className='add-exercise' onClick={() => setshowForm(true)}>
               <AddIcon />
             </button>
+            {showForm ? <SubmitForm setshowForm={setshowForm} handleClickSubmitForm={handleClickSubmitForm} name="exercise" object={{name: '', time: ''}}/> : ''}
             </div>
 
             

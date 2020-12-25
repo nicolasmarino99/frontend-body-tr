@@ -26,6 +26,7 @@ const SubmitForm = ({handleClickSubmitForm, setshowForm, name, object}) => {
               <h4>Routine description</h4>
               <textarea id="ProgresssItems-description" name="description" onChange={handleChange}>
               </textarea>
+              <button type='submit'>submit</button>
             </>
           );
         case 'category':
