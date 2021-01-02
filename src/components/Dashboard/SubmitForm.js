@@ -38,7 +38,7 @@ const SubmitForm = ({handleClickSubmitForm, setshowForm, name, object}) => {
             <h4>Exercise name</h4>
             <input type="text" id="exercise-name" name="name" onChange={handleChange}/>
             <h4>destined time</h4>
-            <input type="text" id="exercise-time" name="time" onChange={handleChange}/>
+            <input type="text" placeholder="00:00:00" id="exercise-time" name="time" onChange={handleChange}/>
             <button type='submit'>submit</button>
           </>)
       }

@@ -26,10 +26,7 @@ const Item = () => {
     const [category, setCategory] = useContext(CategoryContext);
     const [showForm, setshowForm] = useState(false)
     const [progressItem, setProgressItem] = useState({});
-   
     const [state, dispatch] = useContext(ProgressItemsContext);
-    
-    
 
     const progresssItemsUrl = `http://localhost:3001/api/v1/users/${user.id}/categories/${category.id}/tasks/${item.id}/progress_items/`
 
@@ -58,7 +55,7 @@ const Item = () => {
       };
       return (
         <>
-          <div className="warm-up">
+          <div className="Exercise">
             <div className="title">
                 <h2>{exercise.name}</h2>
                 <p>Destined time {exercise.time}</p>
@@ -77,8 +74,8 @@ const Item = () => {
     const Routine = ({item}) => {
         const [showForm, setshowForm] = useState(false)
         const handleClickSubmitExerciseForm = async exercise => {
-          
           updateProgresssItems({progress: exercise}, "ADD_EXERCISE_ITEM", progresssItemsUrl+progressItem.id, dispatch, progressItem.id)
+          getProgresssItems("SHOW_PROGRESS_ITEMS", progresssItemsUrl, dispatch)
         }
         return (
             <div className="warm-up" onClick={() => setProgressItem(item)}>
@@ -95,8 +92,6 @@ const Item = () => {
             </button>
             {showForm ? <SubmitForm setshowForm={setshowForm} handleClickSubmitForm={handleClickSubmitExerciseForm} name="exercise" object={{name: '', time: ''}}/> : ''}
             </div>
-
-            
         )
     }
 

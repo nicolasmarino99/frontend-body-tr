@@ -50,14 +50,12 @@ const getElements = async (type, url, dispatch) => {
   };
 
   const updateElement = async (element, type, url, dispatch, id) => {
-    console.log(element, type, url, dispatch, id)
     try {
       const response = await axios.put(
           url,
           element,
           {withCredentials: true}
       );
-      console.log(response)
       dispatch({
         type,
         payload: {data: [response.data], id}
