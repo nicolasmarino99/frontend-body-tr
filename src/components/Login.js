@@ -37,6 +37,7 @@ const Login = props => {
       try {
           const response = await axios.post('https://backend-body-tr.herokuapp.com/api/v1/login',
           {user}, 
+          {headers: {"Access-Control-Allow-Origin": "*"}},
           {withCredentials: true});
           if (response.data.logged_in) {
             props.handleLogin(response.data)
