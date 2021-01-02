@@ -13,12 +13,13 @@ import './Dashboard.scss'
 import ProgressCircle from './ProgressCircle';
 import Categories from './Categories';
 import { UserContext } from './ContextProviders/UserProvider';
+import Gravatar from 'react-gravatar'
 
 
 const Dashboard = () => {
   
   const [user, setUser] = useContext(UserContext);
-
+  
     const theme = createMuiTheme({
         typography: {
           useNextVariants: true
@@ -33,29 +34,15 @@ const Dashboard = () => {
         }
       });
       
-      const themeB = createMuiTheme({
-        typography: {
-          useNextVariants: true
-        },
-        palette: {
-          primary: {
-            main: "#a5a5a5"
-          },
-          secondary: {
-            main: "#595a5b"
-          }
-        }
-      });
       
-    const [navToggled, setNavToggled] = useState(false)
-    const [darkToggled, setDarkToggled] = useState(true)
+
+    const [navToggled, setNavToggled] = useState(true)
+    
 
     const NavToggled = e => {
-        setNavToggled(prev => !prev);
+        setNavToggled(!navToggled);
       };
-      const darkModeToggled = e => {
-        setDarkToggled(prev => !prev);
-      };
+      
 
     const entries = [
         [
@@ -75,22 +62,18 @@ const Dashboard = () => {
         <ThemeProvider theme={theme}>
         <Navbars
           title="Example tool"
-          themes={[[theme, themeB], darkModeToggled]}
+          themes={[[theme]]}
         />
         <SideNav
           entries={entries}
-          themes={[[theme, themeB], darkModeToggled]}
+          themes={[[theme]]}
           navToggled={NavToggled}
         />
         
-        <div className="Dashboard"> 
-          <div className='Progress'>
-            <ProgressCircle numbers={[user.height, 100]} strokeWidth={10}/> 
-            <ProgressCircle numbers={[user.weight, 100]} strokeWidth={10}/> 
-            <ProgressCircle numbers={[user.height, 100]} strokeWidth={10}/> 
-          </div>
+        <div className="Dashboard">
+            <Gravatar email={user.email} />
             <h1>Hello {user.name}</h1>
-           
+              
               <Categories />
            
           </div>

@@ -6,36 +6,20 @@ const initialProgressItemsState = {
 };
 
 const reducer = (state, action) => {
-  console.log(action, state)
   switch (action.type) {
     case "SHOW_PROGRESS_ITEMS":
       state.progressItems = []
       let progressItems = [...state.progressItems, ...action.payload];
       progressItems = Array.from(new Set(progressItems.map(a => a.id)))
                       .map(id =>  progressItems.find(a => a.id === id))
-                      console.log(progressItems)
+                      
       return {
         progressItems: [...progressItems]
       };
-      case "ADD_PROGRESS_ITEMS":
-        return {
-          progressItems: [...state.progressItems, ...action.payload]
-        };  
 
-    case "SHOW_EXERCISE_ITEM":
+    case "ADD_PROGRESS_ITEMS":
       return {
         progressItems: [...state.progressItems, ...action.payload]
-      };
-      case "ADD_EXERCISE_ITEM":
-        return {
-          progressItems: [...state.progressItems, ...action.payload]
-        };  
-
-        case "DEL_EXERCISE_ITEMS":
-      return {
-        progressItems: state.progressItems.filter(
-          items => items.id !== action.payload
-        )
       };
 
     case "DEL_PROGRESS_ITEMS":
@@ -44,6 +28,18 @@ const reducer = (state, action) => {
           items => items.id !== action.payload
         )
       };
+
+    case "ADD_EXERCISE_ITEM":
+      let currentProgressItem = state.progressItems.filter(
+        items => items.id === action.payload.id
+      )
+      let exercises = currentProgressItem[0].progress
+      exercises = [...exercises, ...action.payload.data]
+      
+      return {
+        progressItems: [...state.progressItems]
+      };
+
     default:
       throw new Error();
   }

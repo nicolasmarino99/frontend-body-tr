@@ -13,7 +13,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import ReactStopwatch from 'react-stopwatch';
 import Stopwatch from './Stopwatch';
 import { ItemContext } from './ContextProviders/ItemProvide';
-import { deleteElement, getElements, getImage, postElement } from './apiCalls';
+import { deleteElement, getElements, updateElement, postElement } from './apiCalls';
 import { UserContext } from './ContextProviders/UserProvider';
 import { CategoryContext } from './ContextProviders/CategoryProvider';
 import { ProgressItemsContext } from './ContextProviders/ProgressItemsProvider';
@@ -28,7 +28,7 @@ const Item = () => {
     const [progressItem, setProgressItem] = useState({});
    
     const [state, dispatch] = useContext(ProgressItemsContext);
-    console.log(state.progressItems)
+    
     
 
     const progresssItemsUrl = `http://localhost:3001/api/v1/users/${user.id}/categories/${category.id}/tasks/${item.id}/progress_items/`
@@ -36,12 +36,14 @@ const Item = () => {
     const getProgresssItems = getElements
     const postProgresssItems = postElement
     const deleteProgresssItems = deleteElement
+    const updateProgresssItems = updateElement
 
     useEffect(() => {
       getProgresssItems("SHOW_PROGRESS_ITEMS", progresssItemsUrl, dispatch)
     }, []);
 
     const handleClickSubmitForm = async info => {
+      console.log(info)
       postProgresssItems({name: info.name, description: info.description }, "ADD_PROGRESS_ITEMS", progresssItemsUrl, dispatch)
     }
 
@@ -55,10 +57,11 @@ const Item = () => {
         setChecked((prev) => !prev);
       };
       return (
+        <>
           <div className="warm-up">
             <div className="title">
                 <h2>{exercise.name}</h2>
-                <p>Time: {exercise.time}</p>
+                <p>Destined time {exercise.time}</p>
             </div>
             <FormGroup>
                 <FormControlLabel
@@ -67,12 +70,16 @@ const Item = () => {
             </FormGroup>
             {checked ? <Stopwatch time={exercise.time}/> : ''}
         </div>
+        </>
       )
     }
 
     const Routine = ({item}) => {
-        const [checked, setChecked] = useState(false);
         const [showForm, setshowForm] = useState(false)
+        const handleClickSubmitExerciseForm = async exercise => {
+          
+          updateProgresssItems({progress: exercise}, "ADD_EXERCISE_ITEM", progresssItemsUrl+progressItem.id, dispatch, progressItem.id)
+        }
         return (
             <div className="warm-up" onClick={() => setProgressItem(item)}>
               <h2>{item.name}</h2>
@@ -86,7 +93,7 @@ const Item = () => {
                 <button className='add-exercise' onClick={() => setshowForm(true)}>
               <AddIcon />
             </button>
-            {showForm ? <SubmitForm setshowForm={setshowForm} handleClickSubmitForm={handleClickSubmitForm} name="exercise" object={{name: '', time: ''}}/> : ''}
+            {showForm ? <SubmitForm setshowForm={setshowForm} handleClickSubmitForm={handleClickSubmitExerciseForm} name="exercise" object={{name: '', time: ''}}/> : ''}
             </div>
 
             

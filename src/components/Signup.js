@@ -14,10 +14,12 @@ const Signup = props => {
         password_confirmation: '',
         errors: []
      }) 
-     const {name, email, password, password_confirmation, weight, height} = credentials
-  
+     const {name, email, password, password_confirmation} = credentials
+  //console.log(password_confirmation, name, email, password)
      const handleChange = event => {
+       
       const {name, value} = event.target
+      credentials.name = value
       setCredentials({...credentials, [name]: value})
      
     };
@@ -32,7 +34,7 @@ const Signup = props => {
             password: password,
             password_confirmation: password_confirmation,
           }
-         
+         console.log(user, password_confirmation, name)
           sendPostRequest(user)
           
            history.push('/')
@@ -93,7 +95,7 @@ const Signup = props => {
           </Form.Group>
           </Col>
           <Col>
-          <Form.Group controlId="formBasicEmail" onSubmit={handleSubmit}>
+          <Form.Group controlId="formBasicEmail">
             <Form.Label>Email</Form.Label>
             <Form.Control 
             placeholder="email"
@@ -128,9 +130,9 @@ const Signup = props => {
           <Form.Group controlId="formBasicPasswordconfirmation">
             <Form.Label>Password confirmation</Form.Label>
             <Form.Control 
-              placeholder="Password confirmation"
+              placeholder="password_confirmation"
               type="password"
-              name="Password confirmation"
+              name="password_confirmation"
               
               onChange={handleChange}
             />

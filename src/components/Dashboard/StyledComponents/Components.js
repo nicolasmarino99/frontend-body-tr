@@ -40,10 +40,13 @@ height: 100%;
 display: flex;
 justify-content: center;
 align-items: center;
-border-radius: 6%;
+border-radius: 11px;
 display: flex;
 flex-direction: column-reverse;
 color: white;
+width: 112%;
+top: .5em;
+position: relative;
 `;
 const ItemCont = styled.div`
     background: url(${props => props.img});

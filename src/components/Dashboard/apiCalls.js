@@ -49,10 +49,28 @@ const getElements = async (type, url, dispatch) => {
     }
   };
 
+  const updateElement = async (element, type, url, dispatch, id) => {
+    console.log(element, type, url, dispatch, id)
+    try {
+      const response = await axios.put(
+          url,
+          element,
+          {withCredentials: true}
+      );
+      console.log(response)
+      dispatch({
+        type,
+        payload: {data: [response.data], id}
+      });
+  } catch (err) {
+      console.error(err);
+  }
+  };
+
   const getImage = async name => {
     const clientIDKey = '5phIk2Z31V96pArCaFDbgnDH0rG6gJZ7NMaCr4R3CEg';
     const ulr2 = `https://api.unsplash.com/search/photos/?client_id=${clientIDKey}&query=${name}`;
     const img = (await axios.get(ulr2)).data.results[0].urls.thumb;
     return img
   }
-export {postElement, getElements, deleteElement, getImage};
+export {postElement, getElements, deleteElement, getImage, updateElement};

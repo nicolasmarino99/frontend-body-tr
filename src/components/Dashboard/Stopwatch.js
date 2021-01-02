@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactStopwatch from 'react-stopwatch';
  
-const Stopwatch = time => (
+const Stopwatch = ({time}) => (
   <ReactStopwatch
     seconds={0}
     minutes={0}

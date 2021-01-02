@@ -43,7 +43,9 @@ const Category = () => {
           <div className="header">
             <img src={category.img}/>
             <h1>{category.name}</h1>
-            <Link to='/'><ClearIcon /></Link>
+            <div className="img-cover">
+              <Link to='/'><ClearIcon /></Link>
+            </div>
           </div>
           <div className="details">
             <div className="social">
@@ -68,7 +70,7 @@ const Category = () => {
               <div className="items">
               {ItemState.items ? ItemState.items.map((item, i) =>(
                   <ItemCont img={item.img} num={i} onClick={() => (setItem(item))}>
-                    <Link to={`/category/${category.name}/${item.name}`}>
+                    <Link className="item-link" to={`/category/${category.name}/${item.name}`}>
                       <Paragraph>
                       <p className="time">8 minutes</p>
                         {item.name}

@@ -31,10 +31,17 @@ const SubmitForm = ({handleClickSubmitForm, setshowForm, name, object}) => {
           );
         case 'category':
           return <input type="text" id="ProgresssItems-name" name="name" onChange={handleChange}/>
-            
         case 'item':
-          return <input type="text" id="ProgresssItems-name" name="name" onChange={handleChange}/>  
-        }
+          return <input type="text" id="ProgresssItems-name" name="name" onChange={handleChange}/>
+        case 'exercise':
+          return (<>
+            <h4>Exercise name</h4>
+            <input type="text" id="exercise-name" name="name" onChange={handleChange}/>
+            <h4>destined time</h4>
+            <input type="text" id="exercise-time" name="time" onChange={handleChange}/>
+            <button type='submit'>submit</button>
+          </>)
+      }
     }
     return (
       <div className="Form" >
