@@ -12,7 +12,7 @@ const Logout = ({handleLogout}) => {
       
     const sendPostRequest = async () => {
         try {
-            const response = await axios.post('http://localhost:3001/api/v1/logout', 
+            const response = await axios.post('https://backend-body-tr.herokuapp.com/api/v1/logout', 
             {withCredentials: true});
             if (response.data.logged_in) {
               //document.cookie = 

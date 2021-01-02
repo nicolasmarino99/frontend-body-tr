@@ -29,7 +29,7 @@ const App = props => {
   }, [])
   const sendGetRequest = async () => {
     try {
-        const response = await axios.get('http://localhost:3001/api/v1/logged_in', 
+        const response = await axios.get('https://backend-body-tr.herokuapp.com/api/v1/logged_in', 
         {withCredentials: true});
         if (response.data.logged_in) {
           handleLogin(response)

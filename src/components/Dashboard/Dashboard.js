@@ -36,11 +36,11 @@ const Dashboard = () => {
       
       
 
-    const [navToggled, setNavToggled] = useState(true)
+    const [navToggled, setNavToggled] = useState(false)
     
 
     const NavToggled = e => {
-        setNavToggled(!navToggled);
+        setNavToggled(prev => !prev);
       };
       
 
@@ -71,12 +71,10 @@ const Dashboard = () => {
         />
         
         <div className="Dashboard">
-            <Gravatar email={user.email} />
-            <h1>Hello {user.name}</h1>
-              
-              <Categories />
-           
-          </div>
+          <Gravatar email={user.email} />
+          <h1>Hello {user.name}</h1>
+          <Categories />
+        </div>
           
       </ThemeProvider>
        

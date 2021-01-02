@@ -28,7 +28,7 @@ const Item = () => {
     const [progressItem, setProgressItem] = useState({});
     const [state, dispatch] = useContext(ProgressItemsContext);
 
-    const progresssItemsUrl = `http://localhost:3001/api/v1/users/${user.id}/categories/${category.id}/tasks/${item.id}/progress_items/`
+    const progresssItemsUrl = `https://backend-body-tr.herokuapp.com/api/v1/users/${user.id}/categories/${category.id}/tasks/${item.id}/progress_items/`
 
     const getProgresssItems = getElements
     const postProgresssItems = postElement

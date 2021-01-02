@@ -35,7 +35,7 @@ const Login = props => {
 
     const sendPostRequest = async (user) => {
       try {
-          const response = await axios.post('http://localhost:3001/api/v1/login',
+          const response = await axios.post('https://backend-body-tr.herokuapp.com/api/v1/login',
           {user}, 
           {withCredentials: true});
           if (response.data.logged_in) {

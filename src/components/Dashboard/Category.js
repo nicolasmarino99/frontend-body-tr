@@ -19,7 +19,7 @@ const Category = () => {
   const [showForm, setshowForm] = useState(false)
   const [user, setUser] = useContext(UserContext);
 
-  const itemsUrl = `http://localhost:3001/api/v1/users/${user.id}/categories/${category.id}/tasks/`
+  const itemsUrl = `https://backend-body-tr.herokuapp.com/api/v1/users/${user.id}/categories/${category.id}/tasks/`
 
   const getItems = getElements
   const postItem = postElement
