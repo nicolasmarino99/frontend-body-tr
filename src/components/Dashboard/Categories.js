@@ -32,6 +32,7 @@ const Categories = () => {
 
   const handleClickSubmitForm = async name => {
     let img = (await getImage(name.name));
+    console.log({name: name.name, img})
     postCategory({name: name.name, img}, "ADD_CATEGORY", categoriesUrl, dispatch)
   }
 
