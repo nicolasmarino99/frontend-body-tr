@@ -1,63 +1,61 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios'
 import { useHistory } from 'react-router';
 import { Form,Button,Row,Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './ocean.scss';
 import './Login.scss';
+import { UserContext } from './Dashboard/ContextProviders/UserProvider';
 
 const Signup = props => {
-    const [credentials, setCredentials] = useState({ 
-        name: '',
-        email: '',
-        password: '',
-        password_confirmation: '',
-        errors: []
-     }) 
-     const {name, email, password, password_confirmation} = credentials
-  //console.log(password_confirmation, name, email, password)
-     const handleChange = event => {
-       
-      const {name, value} = event.target
-      credentials.name = value
-      setCredentials({...credentials, [name]: value})
-     
-    };
-    let history = useHistory();
-    
-      const handleSubmit = event => {
-          event.preventDefault()
-          const {name, email, password, password_confirmation} = credentials
-          let user = {
-            name: name,
-            email: email,
-            password: password,
-            password_confirmation: password_confirmation,
-          }
-         console.log(user, password_confirmation, name)
-          sendPostRequest(user)
-          
-           history.push('/')
-        };
-        const sendPostRequest = async (user) => {
-            try {
-                const response = await axios.post('https://backend-body-tr.herokuapp.com/api/v1/users',
-                {user}, 
-                {withCredentials: true});
-                if (response.data.status === 'created') {
-                  console.log(response.data)
-                  props.handleLogin(response.data)
-                  
-                  
-                } else {
-                  setCredentials({...credentials, errors: response.data.errors})
-                }
-            } catch (err) {
-                // Handle Error Here
-                console.error(err);
-            }
-          }        
-         
+  const [user, setUser] = useContext(UserContext)
+  const [credentials, setCredentials] = useState({
+    name: '',
+    email: '',
+    password: '',
+    password_confirmation: '',
+    errors: []
+  })
+
+  const handleChange = event => {
+    const {name, value} = event.target
+    credentials.name = value
+    setCredentials({...credentials, [name]: value})
+  };
+
+  let history = useHistory();
+
+  const handleSubmit = event => {
+    event.preventDefault()
+    const {name, email, password, password_confirmation} = credentials
+    let user = {
+      name: name,
+      email: email,
+      password: password,
+      password_confirmation: password_confirmation,
+    }
+    console.log(user, password_confirmation, name)
+    sendPostRequest(user)
+    history.push('/')
+  };
+
+  const sendPostRequest = async (user) => {
+    try {
+        const response = await axios.post('https://backend-body-tr.herokuapp.com/api/v1/users',
+        {user}, 
+        {withCredentials: true});
+        if (response.data.status === 'created') {
+          console.log(response.data)
+          setUser(response.data)
+        } else {
+          setCredentials({...credentials, errors: response.data.errors})
+        }
+    } catch (err) {
+        // Handle Error Here
+        console.error(err);
+    }
+  }
+
 
          const handleErrors = () => (
             <div>

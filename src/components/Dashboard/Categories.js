@@ -17,7 +17,9 @@ const Categories = () => {
   const [state, dispatch] = useContext(CategoriesContext);
   const [showForm, setshowForm] = useState(false);
 
-  const categoriesUrl = `https://backend-body-tr.herokuapp.com/api/v1/users/${user.id}/categories/`
+  console.log(user)
+
+  const categoriesUrl = `https://backend-body-tr.herokuapp.com/api/v1/users/${user.user.id}/categories/`
 
   const getCategories = getElements
   const postCategory = postElement

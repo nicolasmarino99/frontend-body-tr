@@ -5,10 +5,12 @@ import { Form,Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Login.scss';
 import './ocean.scss';
-import { UserProvider } from './Dashboard/ContextProviders/UserProvider';
+import { UserContext, UserProvider } from './Dashboard/ContextProviders/UserProvider';
 
+const Login = ({handleLogin}) => {
 
-const Login = props => {
+  const [user, setUser] = useContext(UserContext)
+
   const [credentials, setCredentials] = useState({
     name: '',
     password: '',
@@ -33,14 +35,14 @@ const Login = props => {
         sendPostRequest(user)
     };
 
-    const sendPostRequest = async (user) => {
+    const sendPostRequest = async user => {
       try {
           const response = await axios.post('https://backend-body-tr.herokuapp.com/api/v1/login/',
-          {user}, 
-          {headers: { 'Content-Type': 'application/x-www-form-urlencoded' }},
+          {user},
           {withCredentials: true});
           if (response.data.logged_in) {
-            props.handleLogin(response.data)
+            console.log(response.data)
+            setUser(response.data)
             history.push('/')
           } else {
             setCredentials({...credentials ,errors: response.data.errors})

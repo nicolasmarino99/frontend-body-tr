@@ -17,32 +17,26 @@ import Gravatar from 'react-gravatar'
 
 
 const Dashboard = () => {
-  
   const [user, setUser] = useContext(UserContext);
-  
-    const theme = createMuiTheme({
-        typography: {
-          useNextVariants: true
-        },
-        palette: {
-          primary: {
-            main: "#fbb900"
-          },
-          secondary: {
-            main: "#595a5b"
-          }
-        }
-      });
-      
-      
+  const [navToggled, setNavToggled] = useState(false)
 
-    const [navToggled, setNavToggled] = useState(false)
-    
+  const NavToggled = e => {
+    setNavToggled(prev => !prev);
+  };
 
-    const NavToggled = e => {
-        setNavToggled(prev => !prev);
-      };
-      
+  const theme = createMuiTheme({
+    typography: {
+      useNextVariants: true
+    },
+    palette: {
+      primary: {
+        main: "#fbb900"
+      },
+      secondary: {
+        main: "#595a5b"
+      }
+    }
+  });
 
     const entries = [
         [
@@ -53,7 +47,9 @@ const Dashboard = () => {
           ["All mail", <CancelIcon />, "/all"],
           ["Trash", <AnnouncementIcon />, "/trash"]
         ],
-        [["logout", <OpenInNewIcon />, "/logout"]]
+        [
+          ["logout", <OpenInNewIcon />, "/logout"]
+        ]
       ];
        
 
@@ -71,8 +67,8 @@ const Dashboard = () => {
         />
         
         <div className="Dashboard">
-          <Gravatar email={user.email} />
-          <h1>Hello {user.name}</h1>
+          <Gravatar email={user.user.email} />
+          <h1>Hello {user.user.name}</h1>
           <Categories />
         </div>
           
