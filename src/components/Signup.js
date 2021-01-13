@@ -34,10 +34,32 @@ const Signup = props => {
       password: password,
       password_confirmation: password_confirmation,
     }
+    let loginUser = {
+      name: name,
+      password: password,
+    }
     console.log(user, password_confirmation, name)
     sendPostRequest(user)
+    logginUserRequest(loginUser)
     history.push('/')
   };
+  const logginUserRequest = async user => {
+    try {
+        const response = await axios.post('https://backend-body-tr.herokuapp.com/api/v1/login/',
+        {user},
+        {withCredentials: true});
+        if (response.data.logged_in) {
+          console.log(response.data)
+          setUser(response.data)
+          history.push('/')
+        } else {
+          setCredentials({...credentials ,errors: response.data.errors})
+        }
+    } catch (err) {
+        // Handle Error Here
+        console.error(err);
+    }
+  }
 
   const sendPostRequest = async (user) => {
     try {
@@ -64,17 +86,13 @@ const Signup = props => {
               </ul>
             </div>
           )
-  return ( 
-    
+  return (
     <>
       <nav>
         <h1>Sign Up</h1>
       </nav>
 
     <div className='Signup'>
-      
-            
-    
 
       <Form onSubmit={handleSubmit}>
       <Row>

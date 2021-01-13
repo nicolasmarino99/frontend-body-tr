@@ -32,10 +32,10 @@ const Login = ({handleLogin}) => {
           name: name,
           password: password
         }
-        sendPostRequest(user)
+        logginUserRequest(user)
     };
 
-    const sendPostRequest = async user => {
+    const logginUserRequest = async user => {
       try {
           const response = await axios.post('https://backend-body-tr.herokuapp.com/api/v1/login/',
           {user},
