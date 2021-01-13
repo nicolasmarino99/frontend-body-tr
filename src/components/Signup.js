@@ -19,7 +19,7 @@ const Signup = props => {
 
   const handleChange = event => {
     const {name, value} = event.target
-    credentials.name = value
+
     setCredentials({...credentials, [name]: value})
   };
 
@@ -27,6 +27,7 @@ const Signup = props => {
 
   const handleSubmit = event => {
     event.preventDefault()
+    console.log(credentials.name, 'asdf')
     const {name, email, password, password_confirmation} = credentials
     let user = {
       name: name,
