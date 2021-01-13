@@ -27,7 +27,6 @@ const Signup = props => {
 
   const handleSubmit = event => {
     event.preventDefault()
-    console.log(credentials.name, 'asdf')
     const {name, email, password, password_confirmation} = credentials
     let user = {
       name: name,
