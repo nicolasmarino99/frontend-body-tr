@@ -1,5 +1,6 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const ProgressCircle = ({ numbers, strokeWidth }) => {
   const percentage = Math.floor((numbers[0] / numbers[1]) * 100);
@@ -53,12 +54,6 @@ const ProgressCircle = ({ numbers, strokeWidth }) => {
 
     </div>
   );
-};
-
-ProgressCircle.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  numbers: PropTypes.array.isRequired,
-  strokeWidth: PropTypes.number.isRequired,
 };
 
 export default ProgressCircle;

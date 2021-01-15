@@ -11,6 +11,7 @@ import ItemProvider from './components/Dashboard/ContextProviders/ItemProvide';
 import ProgressItemsProvider from './components/Dashboard/ContextProviders/ProgressItemsProvider';
 
 ReactDOM.render(
+  // eslint-disable-next-line react/jsx-filename-extension
   <React.StrictMode>
     <UserProvider>
       <CategoriesProvider>
@@ -26,7 +27,7 @@ ReactDOM.render(
       </CategoriesProvider>
     </UserProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 // If you want your app to work offline and load faster, you can change
