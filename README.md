@@ -1,70 +1,110 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Body builder social appp routine
 
-https://codesandbox.io/s/m7ov7yrn0x?file=/src/index.js:1898-1904
+This app is meant for people that love making sports, create routines and share them with the world!!
+You can custumize and create full routines with time management. The app lacks of a chat and adding friends, this will be done in the future.
 
-## Available Scripts
+## [Live version](https://frontend-body-tr.herokuapp.com/)
+## [Live api version](https://backend-body-tr.herokuapp.com/api/v1/users)
 
-In the project directory, you can run:
 
-### `yarn start`
+## Table of Contents
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- [Objective](#Objective)
+- [Technologies Used](#Technologies-Used)
+- [Install in Your local Machine](#Install-in-Your-local-Machine)
+- [Acknowledgments](#Acknowledgments)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Objective
 
-### `yarn test`
+The main goal of this project is to explore and learn to connect self-made api in rails with a react app, integrating modern technologies (EcmaScript, webpack, npm, context api, hooks etc...) for extending the capabilities of the tools (rails and react) while consuming third party API's.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+In this game you could find:
 
-### `yarn build`
+- A stack to create categories of sport routines
+- A system to authenticate users from my rails api
+- fetching imgs associated with titles
+- A clock to manage time
+- a tasks subcategory for managing properly routines
+- Nice ui
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The following features are under construction:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+- chat
+- adding friend system
+- sharing routines among poeple
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+[Up](#Table-of-Contents)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Languages and technologies used 
 
-## Learn More
+- React
+- hooks
+- context api
+- JavaScript
+- Babel
+- ESlint
+- npm
+- Webpack
+- HTML/SCSS
+- Rails
+- Rubocop
+- third party API
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+[Up](#Table-of-Contents)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Install in Your local Machine
 
-### Code Splitting
+To run the scripts **npm** is required. To get npm you have to install [Node.js](https://nodejs.org). Follow the installation instructions for your system Mac, Linux or Windows.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+Use your terminal and run the commands after each instruction.
 
-### Analyzing the Bundle Size
+| Command                                             | Description                                           |
+| --------------------------------------------------- | ----------------------------------------------------- |
+| `git clone https://github.com/nicolasmarino99/frontend-body-tr.git` | Clone the repository to you computer                  |
+| `cd frontend-body-tr`                                          | Navigate to the newly created folder                  |
+| `npm install`                                       | Install dependencies and launch browser with examples |
+| `npm run start`                                         | Makes the build and starts the development server     |
+|                                                     | Press `Ctrl + c` to kill **http-server** process      |
+| `http://localhost:3000`                             | Visit this link to play the game                      |
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+[Up](#Table-of-Contents)
 
-### Making a Progressive Web App
+## Acknowledgements
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+- Thank you so much to the author of this [dribbble post](https://dribbble.com/shots/12515775-Fitness-Boxing-App)
+- Thank you so much stack overflow an tons of tutorials and examples from the internet.
 
-### Advanced Configuration
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+[Up](#Table-of-Contents)
 
-### Deployment
+## Author
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+:man: **Nicolás Mariño Parra**
 
-### `yarn build` fails to minify
+- Github: [@nicolasmarino99](https://github.com/nicolasmarino99)
+- Twitter: [@nicolasmarino99](https://twitter.com/nicolasmarino99)
+- Linkedin: [Nicolás Mariño Parra](https://www.linkedin.com/in/nicol%C3%A1s-mari%C3%B1o-parra-45a707177/)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!
+
+Feel free to check the [issues page](https://github.com/nicolasmarino99/Phoom.git/issues).
+
+1. Fork it (https://github.com/nicolasmarino99/frontend-body-tr.git/fork)
+2. Create your feature branch (git checkout -b my-new-feature)
+3. Commit your changes (git commit -am 'Add some feature')
+4. Push to the branch (git push origin my-new-feature)
+5. Create a new Pull Request
+
+## Show your support
+
+Give a ⭐️ if you enjoyed this project!
+
+## 📝 License
+
+This project is [MIT](lic.url) licensed.
