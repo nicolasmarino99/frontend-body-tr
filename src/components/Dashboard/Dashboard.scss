@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap');
+
+.Dashboard {
+  margin: 12vh 3vh 0 11vh;
+  height: 100%;
+
+  .Progress {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .react-gravatar {
+    width: 8em;
+    height: 8em;
+    border-radius: 50%;
+    margin-top: 2em;
+  }
+}
+
+.MuiToolbar-regular-1707 {
+  background: rgb(44, 177, 233);
+  background: linear-gradient(100deg, rgba(44, 177, 233, 1) 0%, rgba(49, 134, 215, 1) 100%);
+}
